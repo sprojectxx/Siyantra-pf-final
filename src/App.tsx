@@ -1,0 +1,85 @@
+import { RouterProvider, useRouter } from './hooks/useRouter';
+import Navbar from './components/layout/Navbar';
+import Footer from './components/layout/Footer';
+import CursorGlow from './components/ui/CursorGlow';
+
+// Import Page Components
+import Home from './components/pages/Home';
+import About from './components/pages/About';
+import ServicesOverviewPage from './components/pages/ServicesOverviewPage';
+import WebDevPage from './components/pages/WebDevPage';
+import AIAutoPage from './components/pages/AIAutoPage';
+import CRMPage from './components/pages/CRMPage';
+import SaaSPage from './components/pages/SaaSPage';
+import MarketingPage from './components/pages/MarketingPage';
+import PortfolioPage from './components/pages/PortfolioPage';
+import ProjectDetailsPage from './components/pages/ProjectDetailsPage';
+import ContactPage from './components/pages/ContactPage';
+
+import { AnimatePresence, motion } from 'motion/react';
+
+function AppContent() {
+  const { path } = useRouter();
+
+  // Custom route router matching
+  const renderPage = () => {
+    if (path === '/') return <Home />;
+    if (path === '/about') return <About />;
+    if (path === '/services') return <ServicesOverviewPage />;
+    if (path === '/services/web-development') return <WebDevPage />;
+    if (path === '/services/ai-automation') return <AIAutoPage />;
+    if (path === '/services/crm-development') return <CRMPage />;
+    if (path === '/services/saas-development') return <SaaSPage />;
+    if (path === '/services/digital-marketing') return <MarketingPage />;
+    if (path === '/portfolio') return <PortfolioPage />;
+    if (path.startsWith('/project/')) return <ProjectDetailsPage />;
+    if (path === '/contact') return <ContactPage />;
+
+    // Default 404 Fallback
+    return (
+      <div className="pt-40 pb-24 text-center min-h-screen flex flex-col justify-center items-center">
+        <h1 className="font-display text-4xl font-extrabold text-brand-text">404 - Not Found</h1>
+        <p className="text-sm text-brand-muted mt-2">The requested view does not exist.</p>
+        <a href="/" className="mt-4 text-xs font-bold text-brand-accent hover:underline">
+          Go back home
+        </a>
+      </div>
+    );
+  };
+
+  return (
+    <div className="min-h-screen bg-brand-bg text-brand-text selection:bg-brand-accent selection:text-white flex flex-col justify-between">
+      {/* Decorative premium cursorglow tracking layer */}
+      <CursorGlow />
+
+      {/* Floating navigation bar */}
+      <Navbar />
+
+      {/* Primary viewport content frame */}
+      <main className="flex-grow">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={path}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.25, ease: 'easeInOut' }}
+          >
+            {renderPage()}
+          </motion.div>
+        </AnimatePresence>
+      </main>
+
+      {/* Core corporate footer directory */}
+      <Footer />
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <RouterProvider>
+      <AppContent />
+    </RouterProvider>
+  );
+}
