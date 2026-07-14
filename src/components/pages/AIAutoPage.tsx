@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from '../../hooks/useRouter';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import { Bot, ArrowRight, CheckCircle2, Cpu, Sparkles, Zap, MessageSquare, Terminal, RefreshCw, Mail, Sliders } from 'lucide-react';
 
 export default function AIAutoPage() {
   const { navigate } = useRouter();
   const [activeStep, setActiveStep] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(true);
 
   const workflowSteps = [
     { label: 'Lead Inbound', desc: 'Prospect submits quote form, triggers self-healing webhook', icon: '📥' },
@@ -20,11 +21,12 @@ export default function AIAutoPage() {
 
   // Auto-rotate pipeline highlights for visual storytelling
   useEffect(() => {
+    if (!isPlaying) return;
     const interval = setInterval(() => {
       setActiveStep((prev) => (prev + 1) % workflowSteps.length);
     }, 2800);
     return () => clearInterval(interval);
-  }, []);
+  }, [isPlaying]);
 
   return (
     <motion.div
@@ -68,49 +70,73 @@ export default function AIAutoPage() {
             
             {/* Left: Animated Step detail card */}
             <div className="lg:col-span-4 bg-brand-text text-white p-6 rounded-2xl border border-neutral-800 shadow-xl flex flex-col justify-between h-72">
-              <div className="flex flex-col gap-4">
-                <div className="flex justify-between items-center">
-                  <span className="font-mono text-[9px] text-brand-accent font-bold tracking-widest uppercase">
-                    ACTIVE PIPELINE STEP [{activeStep + 1}/8]
-                  </span>
-                  <div className="w-2 h-2 rounded-full bg-brand-accent animate-ping" />
-                </div>
-                <div className="flex items-center gap-3 mt-2">
-                  <span className="text-3xl">{workflowSteps[activeStep].icon}</span>
-                  <h3 className="font-display text-lg font-bold">
-                    {workflowSteps[activeStep].label}
-                  </h3>
-                </div>
-                <p className="text-xs text-neutral-400 leading-relaxed font-sans mt-2">
-                  {workflowSteps[activeStep].desc}
-                </p>
-              </div>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeStep}
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -12 }}
+                  transition={{ duration: 0.25, ease: 'easeOut' }}
+                  className="flex flex-col gap-4"
+                >
+                  <div className="flex justify-between items-center">
+                    <span className="font-mono text-[9px] text-brand-accent font-bold tracking-widest uppercase">
+                      ACTIVE PIPELINE STEP [{activeStep + 1}/8]
+                    </span>
+                    <div className="w-2 h-2 rounded-full bg-brand-accent animate-pulse" />
+                  </div>
+                  <div className="flex items-center gap-3 mt-2">
+                    <span className="text-3xl select-none">{workflowSteps[activeStep].icon}</span>
+                    <h3 className="font-display text-lg font-bold">
+                      {workflowSteps[activeStep].label}
+                    </h3>
+                  </div>
+                  <p className="text-xs text-neutral-400 leading-relaxed font-sans mt-2 min-h-[48px]">
+                    {workflowSteps[activeStep].desc}
+                  </p>
+                </motion.div>
+              </AnimatePresence>
 
-              <div className="flex justify-between text-[9px] font-mono text-neutral-500 border-t border-neutral-800 pt-4">
+              <div className="flex justify-between items-center text-[9px] font-mono text-neutral-500 border-t border-neutral-800 pt-4 mt-4">
                 <span>SYSTEM SPEED: &lt; 200MS</span>
-                <span>STATUS: OPERATIONAL</span>
+                <button
+                  onClick={() => setIsPlaying(!isPlaying)}
+                  className="flex items-center gap-1.5 px-2.5 py-1 rounded bg-neutral-900 border border-neutral-800 text-neutral-400 hover:text-white hover:border-brand-accent transition-colors cursor-pointer select-none"
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-brand-accent animate-ping" />
+                  {isPlaying ? 'PAUSE CYCLE' : 'RESUME'}
+                </button>
               </div>
             </div>
 
             {/* Right: Pipeline Node Connector Tree */}
-            <div className="lg:col-span-8 bg-brand-card p-6 sm:p-8 rounded-2xl border border-brand-border grid grid-cols-2 sm:grid-cols-4 gap-4 relative">
+            <div className="lg:col-span-8 bg-brand-card p-6 sm:p-8 rounded-2xl border border-brand-border grid grid-cols-2 sm:grid-cols-4 gap-4 relative select-none">
               
               {workflowSteps.map((step, idx) => {
                 const isActive = activeStep === idx;
                 return (
                   <div
                     key={idx}
-                    onClick={() => setActiveStep(idx)}
-                    className={`p-4 rounded-xl border cursor-pointer transition-all duration-300 relative ${
+                    onClick={() => {
+                      setActiveStep(idx);
+                      setIsPlaying(false); // Pause auto-runner when user interacts manually
+                    }}
+                    className={`p-4 rounded-xl border transition-all duration-300 relative bg-white ${
                       isActive
-                        ? 'bg-white border-brand-accent shadow-md -translate-y-1'
-                        : 'bg-white border-brand-border hover:border-brand-text'
+                        ? 'border-transparent shadow-md -translate-y-1'
+                        : 'border-brand-border hover:border-brand-text cursor-pointer'
                     }`}
                     id={`workflow-node-${idx}`}
                   >
-                    {/* Glowing highlight indicator */}
+                    {/* Glowing sliding highlight border */}
                     {isActive && (
-                      <div className="absolute -top-1.5 -right-1.5 w-3 h-3 bg-brand-accent rounded-full border-2 border-white shadow-[0_0_8px_#FF7A00]" />
+                      <motion.div
+                        layoutId="activeNodeGlow"
+                        className="absolute inset-0 rounded-xl border-2 border-brand-accent shadow-[0_0_12px_rgba(255,122,0,0.15)] pointer-events-none"
+                        transition={{ type: 'spring', damping: 25, stiffness: 220 }}
+                      >
+                        <div className="absolute -top-1.5 -right-1.5 w-3 h-3 bg-brand-accent rounded-full border-2 border-white shadow-[0_0_8px_#FF7A00]" />
+                      </motion.div>
                     )}
 
                     <div className="flex items-center gap-2 mb-2">
