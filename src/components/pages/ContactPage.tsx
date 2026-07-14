@@ -38,7 +38,7 @@ export default function ContactPage() {
       className="pt-32 pb-24 dot-grid min-h-screen text-left"
     >
       <div className="max-w-7xl mx-auto px-6 md:px-8">
-        
+
         {/* Page Banner */}
         <div className="border-b border-brand-border pb-12 mb-16 max-w-4xl">
           <span className="font-mono text-[10px] text-brand-accent uppercase tracking-widest font-bold">
@@ -55,7 +55,7 @@ export default function ContactPage() {
 
         {/* Form and Contacts Split Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-          
+
           {/* Contacts info (Left Column) */}
           <div className="lg:col-span-4 flex flex-col gap-8">
             <div className="flex flex-col gap-3">
@@ -71,41 +71,39 @@ export default function ContactPage() {
             </div>
 
             <div className="flex flex-col gap-4">
-              <div className="flex items-center gap-4 bg-white p-4 rounded-xl border border-brand-border shadow-3xs">
-                <div className="w-10 h-10 rounded-lg bg-orange-50 border border-orange-100 flex items-center justify-center text-brand-accent">
+              <a
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=hari@siyantraaisolution.com&su=Project%20Inquiry%20-%20Siyantra%20AI%20Solutions&body=Hello%20Hari%2C%0A%0AI%20would%20like%20to%20inquire%20about%20building%20a%20project%20with%20Siyantra%20AI%20Solutions.%0A%0AHere%20are%20some%20details%20of%20what%20I%20want%20to%20build%3A%0A-%20Project%20Description%3A%20%0A-%20Target%20Timeline%3A%20%0A-%20Expected%20Budget%3A%20%0A%0ALooking%20forward%20to%20hearing%20from%20you!%0A%0ABest%20regards%2C%0A%5BYour%20Name%5D"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-4 bg-white p-4 rounded-xl border border-brand-border shadow-3xs hover:border-brand-accent hover:shadow-2xs transition-all duration-300 group cursor-pointer"
+              >
+                <div className="w-10 h-10 rounded-lg bg-orange-50 border border-orange-100 flex items-center justify-center text-brand-accent group-hover:bg-brand-accent group-hover:text-white transition-all duration-300">
                   <Mail className="w-5 h-5" />
                 </div>
                 <div className="flex flex-col">
                   <span className="font-mono text-[9px] text-brand-muted uppercase">EMAIL ENQUIRIES</span>
-                  <a href="mailto:hello@siyantra.ai" className="text-sm font-bold text-brand-text hover:text-brand-accent transition-colors">
-                    hello@siyantra.ai
-                  </a>
+                  <span className="text-sm font-bold text-brand-text group-hover:text-brand-accent transition-colors">
+                    hari@siyantraaisolution.com
+                  </span>
                 </div>
-              </div>
+              </a>
 
-              <div className="flex items-center gap-4 bg-white p-4 rounded-xl border border-brand-border shadow-3xs">
-                <div className="w-10 h-10 rounded-lg bg-orange-50 border border-orange-100 flex items-center justify-center text-brand-accent">
+              <a
+                href="https://wa.me/917984666368"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-4 bg-white p-4 rounded-xl border border-brand-border shadow-3xs hover:border-brand-accent hover:shadow-2xs transition-all duration-300 group cursor-pointer"
+              >
+                <div className="w-10 h-10 rounded-lg bg-orange-50 border border-orange-100 flex items-center justify-center text-brand-accent group-hover:bg-brand-accent group-hover:text-white transition-all duration-300">
                   <Phone className="w-5 h-5" />
                 </div>
                 <div className="flex flex-col">
-                  <span className="font-mono text-[9px] text-brand-muted uppercase">PHONE SLA</span>
-                  <a href="tel:+15552345678" className="text-sm font-bold text-brand-text hover:text-brand-accent transition-colors">
-                    +1 (555) 234-5678
-                  </a>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-4 bg-white p-4 rounded-xl border border-brand-border shadow-3xs">
-                <div className="w-10 h-10 rounded-lg bg-orange-50 border border-orange-100 flex items-center justify-center text-brand-accent">
-                  <MapPin className="w-5 h-5" />
-                </div>
-                <div className="flex flex-col">
-                  <span className="font-mono text-[9px] text-brand-muted uppercase">SAN FRANCISCO HQ</span>
-                  <span className="text-sm font-bold text-brand-text">
-                    548 Market St, SF, CA
+                  <span className="font-mono text-[9px] text-brand-muted uppercase">INSTANT CHAT</span>
+                  <span className="text-sm font-bold text-brand-text group-hover:text-brand-accent transition-colors">
+                    Whatsapp
                   </span>
                 </div>
-              </div>
+              </a>
             </div>
           </div>
 
@@ -177,21 +175,6 @@ export default function ContactPage() {
                       <option value="crm-development">CRM Development</option>
                       <option value="saas-development">SaaS Platforms</option>
                       <option value="digital-marketing">Digital Marketing</option>
-                    </select>
-                  </div>
-
-                  <div className="flex flex-col gap-1.5">
-                    <label className="text-[10px] font-bold text-brand-text uppercase font-mono">Target Budget</label>
-                    <select
-                      name="budget"
-                      value={formData.budget}
-                      onChange={handleInputChange}
-                      className="px-4 py-3 rounded-xl border border-brand-border bg-brand-card text-xs text-brand-text focus:outline-none focus:border-brand-accent focus:bg-white transition-all"
-                    >
-                      <option value="$5k - $10k">$5k - $10k</option>
-                      <option value="$10k - $25k">$10k - $25k</option>
-                      <option value="$25k - $50k">$25k - $50k</option>
-                      <option value="$50k+">$50k+</option>
                     </select>
                   </div>
                 </div>

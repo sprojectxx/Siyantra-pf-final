@@ -1,12 +1,39 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { SERVICES } from '../../constants/data';
 import { useRouter } from '../../hooks/useRouter';
-import { motion } from 'motion/react';
+import { motion, useScroll, useTransform, useSpring } from 'motion/react';
 import { ArrowRight, Laptop, Bot, Activity, Layers, TrendingUp } from 'lucide-react';
 
 export default function ServicesOverview() {
   const { navigate } = useRouter();
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
+
+  // Track scroll position of the services grid container
+  const gridRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: gridRef,
+    offset: ['start end', 'end start']
+  });
+
+  // Smooth scroll progress using spring animation
+  const smoothProgress = useSpring(scrollYProgress, { damping: 35, stiffness: 80, mass: 0.5 });
+
+  // Generate staggered translation values for columns to create 3D scrolling depth
+  const yCard0 = useTransform(smoothProgress, [0, 1], [40, -40]);
+  const yCard1 = useTransform(smoothProgress, [0, 1], [80, -80]);
+  const yCard2 = useTransform(smoothProgress, [0, 1], [20, -20]);
+  const yCard3 = useTransform(smoothProgress, [0, 1], [60, -60]);
+  const yCard4 = useTransform(smoothProgress, [0, 1], [95, -95]);
+  const yCard5 = useTransform(smoothProgress, [0, 1], [35, -35]);
+
+  const getCardY = (idx: number) => {
+    switch (idx % 3) { // Base staggering on grid column positions
+      case 0: return idx % 2 === 0 ? yCard0 : yCard3;
+      case 1: return idx % 2 === 0 ? yCard1 : yCard4;
+      case 2: return idx % 2 === 0 ? yCard2 : yCard5;
+      default: return 0;
+    }
+  };
 
   // Map service IDs to modern representative icons
   const getServiceIcon = (id: string) => {
@@ -188,63 +215,68 @@ export default function ServicesOverview() {
         </div>
 
         {/* Dynamic Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {SERVICES.map((service) => {
+        <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {SERVICES.map((service, idx) => {
             const isHovered = hoveredCard === service.id;
             return (
               <motion.div
                 key={service.id}
-                onMouseEnter={() => setHoveredCard(service.id)}
-                onMouseLeave={() => setHoveredCard(null)}
-                onClick={() => navigate(service.path)}
-                className={`group p-6 rounded-2xl bg-white border border-brand-border shadow-2xs hover:shadow-lg transition-all duration-300 cursor-pointer flex flex-col justify-between gap-6 relative overflow-hidden ${
-                  isHovered ? '-translate-y-1.5' : ''
-                }`}
-                id={`service-card-${service.id}`}
+                style={{ y: getCardY(idx) }}
+                className="w-full h-full"
               >
-                {/* Accent Gradient Border Line */}
-                <div
-                  className={`absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r ${service.highlightColor} transition-transform duration-300 ${
-                    isHovered ? 'scale-x-100' : 'scale-x-0'
-                  }`}
-                />
+                <motion.div
+                  onMouseEnter={() => setHoveredCard(service.id)}
+                  onMouseLeave={() => setHoveredCard(null)}
+                  onClick={() => navigate(service.path)}
+                  whileHover={{ y: -8 }}
+                  transition={{ duration: 0.25 }}
+                  className="group p-6 rounded-2xl bg-white border border-brand-border shadow-2xs hover:shadow-lg cursor-pointer flex flex-col justify-between gap-6 relative overflow-hidden h-full"
+                  id={`service-card-${service.id}`}
+                >
+                  {/* Accent Gradient Border Line */}
+                  <div
+                    className={`absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r ${service.highlightColor} transition-transform duration-300 ${
+                      isHovered ? 'scale-x-100' : 'scale-x-0'
+                    }`}
+                  />
 
-                <div className="flex flex-col gap-4">
-                  {/* Card Header & Icon */}
-                  <div className="flex justify-between items-start">
-                    <div className="w-12 h-12 rounded-xl bg-brand-card border border-brand-border flex items-center justify-center group-hover:bg-orange-50 group-hover:border-brand-accent/25 transition-colors duration-300 shadow-3xs">
-                      {getServiceIcon(service.id)}
+                  <div className="flex flex-col gap-4">
+                    {/* Card Header & Icon */}
+                    <div className="flex justify-between items-start">
+                      <div className="w-12 h-12 rounded-xl bg-brand-card border border-brand-border flex items-center justify-center group-hover:bg-orange-50 group-hover:border-brand-accent/25 transition-colors duration-300 shadow-3xs">
+                        {getServiceIcon(service.id)}
+                      </div>
+                      <ArrowRight className="w-4 h-4 text-brand-muted group-hover:text-brand-accent group-hover:translate-x-1 transition-all" />
                     </div>
-                    <ArrowRight className="w-4 h-4 text-brand-muted group-hover:text-brand-accent group-hover:translate-x-1 transition-all" />
+
+                    {/* Text Content */}
+                    <div className="flex flex-col gap-1.5">
+                      <h3 className="font-display text-lg font-bold text-brand-text group-hover:text-brand-accent transition-colors">
+                        {service.title}
+                      </h3>
+                      <p className="text-xs text-brand-muted leading-relaxed min-h-[48px]">
+                        {service.description}
+                      </p>
+                    </div>
                   </div>
 
-                  {/* Text Content */}
-                  <div className="flex flex-col gap-1.5">
-                    <h3 className="font-display text-lg font-bold text-brand-text group-hover:text-brand-accent transition-colors">
-                      {service.title}
-                    </h3>
-                    <p className="text-xs text-brand-muted leading-relaxed min-h-[48px]">
-                      {service.description}
-                    </p>
+                  {/* Animated Interactive Miniature Preview */}
+                  <div className="mt-2 bg-brand-card p-1.5 rounded-xl border border-brand-border/60">
+                    {renderMiniPreview(service.id, isHovered)}
                   </div>
-                </div>
 
-                {/* Animated Interactive Miniature Preview */}
-                <div className="mt-2 bg-brand-card p-1.5 rounded-xl border border-brand-border/60">
-                  {renderMiniPreview(service.id, isHovered)}
-                </div>
-
-                {/* Feature Tags list */}
-                <div className="flex flex-wrap gap-1.5 pt-2">
-                  {service.features.slice(0, 2).map((feat, idx) => (
-                    <span
-                      key={idx}
-                      className="font-mono text-[9px] font-medium px-2 py-0.5 rounded-md bg-brand-card border border-brand-border text-brand-muted"
-                    >
-                      {feat}
-                    </span>
-                  ))}
-                </div>
+                  {/* Feature Tags list */}
+                  <div className="flex flex-wrap gap-1.5 pt-2">
+                    {service.features.slice(0, 2).map((feat, idx) => (
+                      <span
+                        key={idx}
+                        className="font-mono text-[9px] font-medium px-2 py-0.5 rounded-md bg-brand-card border border-brand-border text-brand-muted"
+                      >
+                        {feat}
+                      </span>
+                    ))}
+                  </div>
+                </motion.div>
               </motion.div>
             );
           })}

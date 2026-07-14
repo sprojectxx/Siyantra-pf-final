@@ -1,8 +1,10 @@
+import { useState } from 'react';
 import { useRouter } from '../../hooks/useRouter';
 import { Sparkles, ArrowRight } from 'lucide-react';
 
 export default function Footer() {
   const { navigate } = useRouter();
+  const [logoError, setLogoError] = useState(false);
 
   const handleLinkClick = (href: string) => {
     navigate(href);
@@ -27,9 +29,9 @@ export default function Footer() {
       { label: 'Client FAQ', href: '/#faq' },
     ],
     Contact: [
-      { label: 'hello@siyantra.ai', href: 'mailto:hello@siyantra.ai' },
-      { label: '+1 (555) 234-5678', href: 'tel:+15552345678' },
-      { label: 'San Francisco, CA', href: '/contact' },
+      { label: 'hari@siyantraaisolution.com', href: 'mailto:hari@siyantraaisolution.com' },
+      { label: '+91 79846 66368', href: 'https://wa.me/917984666368' },
+      { label: 'India / CA', href: '/contact' },
     ]
   };
 
@@ -48,9 +50,20 @@ export default function Footer() {
                 className="flex items-center gap-2.5 group text-left cursor-pointer self-start"
                 id="footer-logo-btn"
               >
-                <div className="w-8 h-8 bg-brand-accent rounded-lg flex items-center justify-center transition-transform duration-300 group-hover:rotate-90 shadow-sm">
-                  <div className="w-3.5 h-3.5 bg-white rounded-xs rotate-45" />
-                </div>
+            {!logoError ? (
+              <div className="w-8 h-8 bg-neutral-950 rounded-lg flex items-center justify-center shadow-sm overflow-hidden p-0.5 border border-neutral-800">
+                <img
+                  src="/logo.png"
+                  alt="SIYANTRA logo"
+                  onError={() => setLogoError(true)}
+                  className="w-full h-full object-contain group-hover:rotate-12 transition-transform duration-300"
+                />
+              </div>
+            ) : (
+              <div className="w-8 h-8 bg-brand-accent rounded-lg flex items-center justify-center transition-transform duration-300 group-hover:rotate-90 shadow-sm">
+                <div className="w-3.5 h-3.5 bg-white rounded-xs rotate-45" />
+              </div>
+            )}
                 <div className="flex flex-col">
                   <span className="font-display font-extrabold text-brand-text text-[15px] tracking-tight leading-none">
                     SIYANTRA
@@ -88,8 +101,8 @@ export default function Footer() {
                     <li key={link.label}>
                       <button
                         onClick={() => {
-                          if (link.href.startsWith('mailto:') || link.href.startsWith('tel:')) {
-                            window.location.href = link.href;
+                          if (link.href.startsWith('mailto:') || link.href.startsWith('tel:') || link.href.startsWith('https://')) {
+                            window.open(link.href, '_blank');
                           } else if (link.href.startsWith('/#')) {
                             const elementId = link.href.substring(2);
                             navigate('/');

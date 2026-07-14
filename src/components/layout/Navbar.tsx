@@ -7,6 +7,7 @@ export default function Navbar() {
   const { path, navigate } = useRouter();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [logoError, setLogoError] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,10 +21,11 @@ export default function Navbar() {
     { label: 'Home', href: '/' },
     { label: 'About Us', href: '/about' },
     { label: 'Services', href: '/services' },
+    { label: 'Websites', href: '/services/web-development' },
     { label: 'Agents', href: '/services/ai-automation' },
-    { label: 'websites', href: '/services/web-development' },
-    { label: 'Automations', href: '/services/saas-development' },
-    { label: 'CRM\'s', href: '/services/crm-development' },
+    { label: 'SaaS', href: '/services/saas-development' },
+    { label: "CRM's", href: '/services/crm-development' },
+    { label: "Marketing", href: '/services/digital-marketing' },
   ];
 
   const handleLinkClick = (href: string) => {
@@ -48,16 +50,25 @@ export default function Navbar() {
         className="fixed top-4 left-4 right-4 lg:top-6 lg:left-1/2 lg:-translate-x-1/2 lg:right-auto z-50 w-[calc(100%-2rem)] lg:w-max max-w-[95%] transition-all duration-300"
       >
         <div className="backdrop-blur-xl bg-white/45 border border-black/[0.06] sm:border-white/60 shadow-[inset_0_1px_2px_rgba(255,255,255,0.6),0_12px_40px_-12px_rgba(0,0,0,0.08)] rounded-full p-2 flex items-center justify-between lg:justify-start gap-4 lg:gap-1.5 xl:gap-4 select-none">
-          
+
           {/* Left: Logo Capsule */}
           <button
             onClick={() => handleLinkClick('/')}
             className="bg-brand-text text-white border border-transparent px-4 py-2 sm:px-5 sm:py-2.5 rounded-full flex items-center gap-2.5 group cursor-pointer text-left transition-all duration-300 shadow-sm"
             id="logo-btn"
           >
-            <div className="w-6 h-6 bg-brand-accent rounded-full flex items-center justify-center transition-transform duration-500 group-hover:rotate-90 shadow-sm">
-              <div className="w-2.5 h-2.5 bg-white rounded-xs rotate-45" />
-            </div>
+            {!logoError ? (
+              <img
+                src="/logo.png"
+                alt="SIYANTRA logo"
+                onError={() => setLogoError(true)}
+                className="w-6 h-6 object-contain group-hover:rotate-12 transition-transform duration-300"
+              />
+            ) : (
+              <div className="w-6 h-6 bg-brand-accent rounded-full flex items-center justify-center transition-transform duration-500 group-hover:rotate-90 shadow-sm">
+                <div className="w-2.5 h-2.5 bg-white rounded-xs rotate-45" />
+              </div>
+            )}
             <div className="flex flex-col">
               <span className="font-display font-extrabold text-white text-xs sm:text-[13px] tracking-tight leading-none">
                 SIYANTRA
@@ -74,9 +85,8 @@ export default function Navbar() {
               <button
                 key={link.href}
                 onClick={() => handleLinkClick(link.href)}
-                className={`relative font-display text-[11px] xl:text-xs font-bold tracking-wider px-3.5 py-2.5 transition-all cursor-pointer rounded-full ${
-                  isActive(link.href) ? 'text-brand-text' : 'text-brand-muted hover:text-brand-text'
-                }`}
+                className={`relative font-display text-[11px] xl:text-xs font-bold tracking-wider px-3.5 py-2.5 transition-all cursor-pointer rounded-full ${isActive(link.href) ? 'text-brand-text' : 'text-brand-muted hover:text-brand-text'
+                  }`}
               >
                 {link.label}
                 {isActive(link.href) && (
@@ -140,9 +150,8 @@ export default function Navbar() {
                   onClick={() => handleLinkClick(link.href)}
                   className="text-left py-2 px-4 rounded-xl hover:bg-white/5 transition-all flex items-center justify-between cursor-pointer group"
                 >
-                  <span className={`font-display text-2xl font-bold tracking-tight ${
-                    isActive(link.href) ? 'text-brand-accent' : 'text-neutral-200 group-hover:text-white'
-                  }`}>
+                  <span className={`font-display text-2xl font-bold tracking-tight ${isActive(link.href) ? 'text-brand-accent' : 'text-neutral-200 group-hover:text-white'
+                    }`}>
                     {link.label}
                   </span>
                   <ArrowRight className="w-5 h-5 text-neutral-600 group-hover:text-brand-accent group-hover:translate-x-1 transition-all" />

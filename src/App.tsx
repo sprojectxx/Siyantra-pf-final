@@ -2,6 +2,7 @@ import { RouterProvider, useRouter } from './hooks/useRouter';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import CursorGlow from './components/ui/CursorGlow';
+import IntroWrapper from './components/animations/IntroWrapper';
 
 // Import Page Components
 import Home from './components/pages/Home';
@@ -79,7 +80,9 @@ function AppContent() {
 export default function App() {
   return (
     <RouterProvider>
-      <AppContent />
+      <IntroWrapper>
+        <AppContent />
+      </IntroWrapper>
     </RouterProvider>
   );
 }
