@@ -35,8 +35,7 @@ export default function PortfolioPage() {
           {PROJECTS.map((proj) => (
             <div
               key={proj.slug}
-              onClick={() => navigate(`/project/${proj.slug}`)}
-              className="p-6 rounded-2xl bg-white border border-brand-border shadow-3xs hover:shadow-lg hover:border-brand-accent/50 transition-all duration-300 cursor-pointer flex flex-col justify-between h-[520px] group relative"
+              className="p-6 rounded-2xl bg-white border border-brand-border shadow-3xs hover:shadow-lg transition-all duration-300 flex flex-col justify-between h-[480px] group relative"
               id={`portfolio-card-${proj.slug}`}
             >
               <div className="flex flex-col gap-5">
@@ -73,8 +72,7 @@ export default function PortfolioPage() {
               </div>
 
               {/* Metrics block anchored at the bottom-middle of each card */}
-              <div className="border-t border-brand-border/60 pt-4 mt-4 flex flex-col gap-4">
-                
+              <div className="border-t border-brand-border/60 pt-4 mt-4">
                 {/* Metrics Highlight Pills */}
                 <div className="grid grid-cols-3 gap-2 bg-brand-card p-2.5 rounded-xl border border-brand-border">
                   {proj.metrics.slice(0, 3).map((met, idx) => (
@@ -88,14 +86,7 @@ export default function PortfolioPage() {
                     </div>
                   ))}
                 </div>
-
-                {/* Action Link */}
-                <div className="flex justify-between items-center text-xs font-bold text-brand-accent">
-                  <span>View Full Case Study</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
-                </div>
               </div>
-
             </div>
           ))}
         </div>

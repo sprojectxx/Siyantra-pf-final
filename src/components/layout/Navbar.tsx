@@ -21,6 +21,7 @@ export default function Navbar() {
     { label: 'Home', href: '/' },
     { label: 'About Us', href: '/about' },
     { label: 'Services', href: '/services' },
+    { label: 'Portfolio', href: '/portfolio' },
     { label: 'Websites', href: '/services/web-development' },
     { label: 'Agents', href: '/services/ai-automation' },
     { label: 'SaaS', href: '/services/saas-development' },

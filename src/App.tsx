@@ -14,7 +14,6 @@ import CRMPage from './components/pages/CRMPage';
 import SaaSPage from './components/pages/SaaSPage';
 import MarketingPage from './components/pages/MarketingPage';
 import PortfolioPage from './components/pages/PortfolioPage';
-import ProjectDetailsPage from './components/pages/ProjectDetailsPage';
 import ContactPage from './components/pages/ContactPage';
 
 import { AnimatePresence, motion } from 'motion/react';
@@ -33,7 +32,6 @@ function AppContent() {
     if (path === '/services/saas-development') return <SaaSPage />;
     if (path === '/services/digital-marketing') return <MarketingPage />;
     if (path === '/portfolio') return <PortfolioPage />;
-    if (path.startsWith('/project/')) return <ProjectDetailsPage />;
     if (path === '/contact') return <ContactPage />;
 
     // Default 404 Fallback
