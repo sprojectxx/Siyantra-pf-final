@@ -1,3 +1,4 @@
+// Optimized with sliding layoutId animations and pause controls
 import { useState, useEffect } from 'react';
 import { useRouter } from '../../hooks/useRouter';
 import { motion, AnimatePresence } from 'motion/react';
