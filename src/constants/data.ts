@@ -90,44 +90,46 @@ export const PROJECTS: Project[] = [
     externalLink: 'https://www.landregistrytransfers.com/'
   },
   {
-    slug: 'flowsync-automation',
-    title: 'FlowSync Automation Suite',
-    client: 'Apex Capital Partners',
-    industry: 'Financial Services',
-    category: 'AI Automation',
-    challenge: 'Apex analysts spent a collective 450 hours per month copying invoice data, compiling compliance checklists, and updating slack channels manually from scanned PDF files.',
-    solution: 'Configured a self-hosted n8n system linked with LangChain and Python OCR scripts to process all incoming financial assets automatically. The workflow qualifies documents, extracts key values, updates CRM accounts, drafts replies, and notifies team leads.',
-    technology: ['Python', 'n8n', 'LangChain', 'OpenAI', 'Postgres'],
-    result: 'Automated 92% of invoice triage operations, leading to instant financial reporting and over $18,000 saved monthly in operational overhead.',
+    slug: 'online-land-registry',
+    title: 'Online Land Registry',
+    client: 'Online Land Registry',
+    industry: 'PROPERTY SERVICES',
+    category: 'LAND REGISTRY PORTAL',
+    challenge: 'Property owners and professionals often face complex and time-consuming procedures when obtaining Land Registry documents and managing property-related applications. Accessing accurate property information and legal documentation can be confusing without a streamlined digital process.',
+    solution: 'Designed and developed a comprehensive property services portal that provides secure online access to Land Registry documents, conveyancing services, property ownership records, and digital application processing. The platform simplifies property-related transactions through an intuitive and responsive user experience.',
+    technology: ['React', 'Node.js', 'Postgres', 'Tailwind CSS'],
+    result: 'Enabled 95% digital document access, boosted application processing by 55%, and improved service efficiency by 2.8x.',
     metrics: [
-      { label: 'Manual Effort Reduced', value: '92%' },
-      { label: 'Average Processing Time', value: '12s' },
-      { label: 'Monthly Operations Saved', value: '450hrs' }
+      { label: 'DIGITAL DOCUMENT ACCESS', value: '95%' },
+      { label: 'FASTER APPLICATION PROCESSING', value: '+55%' },
+      { label: 'IMPROVED SERVICE EFFICIENCY', value: '2.8x' }
     ],
-    problemDetails: 'Financial audits require strict compliance verification. Re-keying transactions from scans led to human errors and regulatory risks, keeping senior analysts stuck doing routine data entry.',
-    researchDetails: 'We mapped the flow of documents from shared folders, emails, and client portals, and engineered a fail-safe exception circuit where anomalies are flagged to a human supervisor.',
-    developmentDetails: 'Developed Python agents running on AWS utilizing LangChain with secure vector embeddings. Created a custom dashboard widget to monitor pipeline queue health in real time.',
-    images: ['automation_preview.png']
+    problemDetails: 'Property owners and professionals often face complex and time-consuming procedures when obtaining Land Registry documents and managing property-related applications.',
+    researchDetails: 'Mapped out digital application validation steps and database schemas for property deeds.',
+    developmentDetails: 'Built a secure, scalable web portal with React and Postgres backend databases.',
+    images: ['saas_portal_preview.png'],
+    externalLink: 'https://www.onlinelandregistry.uk'
   },
   {
-    slug: 'retail-engine-saas',
-    title: 'RetailEngine SaaS',
-    client: 'Nova Commerce Corp',
-    industry: 'E-Commerce / Retail',
-    category: 'SaaS Products',
-    challenge: 'Legacy e-commerce subscription managers suffered high subscriber churn due to laggy multi-tenant portals, failed Stripe retry logic, and opaque billing histories.',
-    solution: 'Engineered a lightning-fast custom subscription SaaS platform built with server-side caching, fully modular Stripe billing customer portals, and a detailed usage analytics panel.',
-    technology: ['React', 'Next.js', 'Stripe', 'Redis', 'Supabase'],
-    result: 'Reduced customer subscription checkout completion time from 18 seconds to 1.8 seconds, driving a substantial decline in churn and cart drop-offs.',
+    slug: 'lexpo-bv',
+    title: 'Lexpo BV',
+    client: 'Lexpo BV',
+    industry: 'LANDING PAGE',
+    category: 'CORPORATE WEBSITE',
+    challenge: 'The client required a modern and professional digital presence to effectively showcase its services and establish credibility with potential customers. The existing online visibility needed a clean, user-friendly, and responsive solution.',
+    solution: 'Designed and developed a high-converting landing page with a modern UI/UX, responsive design, optimized performance, and strategically placed call-to-action sections to improve customer engagement and drive business inquiries.',
+    technology: ['React', 'Tailwind CSS', 'Framer Motion', 'Vite'],
+    result: 'Improved mobile responsiveness to 95%, boosted user engagement by 50%, and doubled lead generation potential.',
     metrics: [
-      { label: 'Checkout Load Time', value: '1.8s' },
-      { label: 'Subscriber Churn Drop', value: '-22%' },
-      { label: 'API Response Speed', value: '45ms' }
+      { label: 'MOBILE RESPONSIVENESS', value: '95%' },
+      { label: 'USER ENGAGEMENT', value: '+50%' },
+      { label: 'LEAD GENERATION POTENTIAL', value: '2x' }
     ],
-    problemDetails: 'Subscription retail relies on frictionless transactional portals. Any delay in loading portal pages or billing update forms triggers active customer drop-offs and customer support queues.',
-    researchDetails: 'We optimized critical path rendering, utilized sub-millisecond key-value caching, and designed a custom modern account layout supporting instant, self-service cancellation/upgrades.',
-    developmentDetails: 'Crafted with React functional hooks and Framer Motion layouts. Leveraged PostgreSQL with Supabase for fast, modern multi-tenant authorization rules.',
-    images: ['saas_portal_preview.png']
+    problemDetails: 'The client required a modern and professional digital presence to effectively showcase its services and establish credibility with potential customers.',
+    researchDetails: 'Audited user journey mapping and responsive screen flows.',
+    developmentDetails: 'Developed custom, optimized layouts with fluid transition triggers.',
+    images: ['automation_preview.png'],
+    externalLink: 'https://lexpobv.com/'
   }
 ];
 
