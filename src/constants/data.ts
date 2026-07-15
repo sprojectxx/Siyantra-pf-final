@@ -69,24 +69,25 @@ export const SERVICES: ServiceItem[] = [
 
 export const PROJECTS: Project[] = [
   {
-    slug: 'pulse-crm',
-    title: 'PulseCRM AI',
-    client: 'Pulse Systems Inc',
-    industry: 'Enterprise Software',
-    category: 'CRM Development',
-    challenge: 'A global logistics client with 120+ sales representatives was losing 35% of qualified leads due to slow manual entry and lack of predictive prioritization in their legacy spreadsheets.',
-    solution: 'Designed and engineered an automated lead scoring CRM with custom role management, interactive drag-and-drop kanban boards, and a server-side OpenAI recommendation engine that analyzes client emails and flags urgent tickets.',
-    technology: ['React', 'Node.js', 'Postgres', 'OpenAI', 'Tailwind CSS'],
-    result: 'Replaced manual tracking with automated pipeline triggers, boosting representative productivity by 40% and cutting response times to under 5 minutes.',
+    slug: 'land-registry-transfers',
+    title: 'LandRegistryTransfers',
+    client: 'Land Registry Transfers',
+    industry: 'LEGAL SERVICES',
+    category: 'PROPERTY TRANSFERS',
+    challenge: 'Property owners were experiencing delays and complex legal procedures when transferring property ownership and updating Land Registry records, resulting in inefficient and time-consuming processes.',
+    solution: 'Designed and engineered a secure digital property transfer platform with simplified Land Registry applications, transfer of equity services, and efficient document management to streamline the entire ownership transfer process.',
+    technology: ['React', 'Node.js', 'Postgres', 'Tailwind CSS'],
+    result: 'Reduced processing times by 85% and manual paperwork by 60% with a 95% customer satisfaction rate.',
     metrics: [
-      { label: 'Lead Scoring Accuracy', value: '94%' },
-      { label: 'Team Productivity', value: '+40%' },
-      { label: 'Sales Velocity Increase', value: '2.4x' }
+      { label: 'FASTER PROCESSING', value: '85%' },
+      { label: 'LESS MANUAL PAPERWORK', value: '60%' },
+      { label: 'CUSTOMER SATISFACTION', value: '95%' }
     ],
-    problemDetails: 'The client’s operations were severely hindered by data silos, manual CRM updates, and cold handoffs between marketing and account reps. Lead routing was arbitrary, leading to client fatigue and lost high-value deals.',
-    researchDetails: 'We interviewed sales leads, mapped the pipeline stages, and audited legacy databases. We recognized that incorporating direct context from client email inquiries using LLMs would streamline qualification.',
-    developmentDetails: 'Built using React 19 and custom Tailwind layouts. We integrated Express APIs and a Postgres backend, secured with OAuth, and created complex role permissions separating regional team leaders and individual representatives.',
-    images: ['crm_dash_preview.png']
+    problemDetails: 'Property owners were experiencing delays and complex legal procedures when transferring property ownership and updating Land Registry records, resulting in inefficient and time-consuming processes.',
+    researchDetails: 'Audited manual forms and workflows to design a digital-first submission system.',
+    developmentDetails: 'Built with React, secure Postgres storage, and PDF generation tools.',
+    images: ['crm_dash_preview.png'],
+    externalLink: 'https://www.landregistrytransfers.com/'
   },
   {
     slug: 'flowsync-automation',

@@ -26,6 +26,7 @@ export interface Project {
   researchDetails: string;
   developmentDetails: string;
   images: string[]; // Mock illustrations / patterns
+  externalLink?: string;
   testimonial?: {
     quote: string;
     author: string;
