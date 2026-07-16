@@ -77,12 +77,12 @@ export default function ContactPage() {
                 rel="noopener noreferrer"
                 className="flex items-center gap-4 bg-white p-4 rounded-xl border border-brand-border shadow-3xs hover:border-brand-accent hover:shadow-2xs transition-all duration-300 group cursor-pointer"
               >
-                <div className="w-10 h-10 rounded-lg bg-orange-50 border border-orange-100 flex items-center justify-center text-brand-accent group-hover:bg-brand-accent group-hover:text-white transition-all duration-300">
+                <div className="w-10 h-10 rounded-lg bg-orange-50 border border-orange-100 flex items-center justify-center text-brand-accent-text group-hover:bg-brand-accent group-hover:text-white transition-all duration-300">
                   <Mail className="w-5 h-5" />
                 </div>
                 <div className="flex flex-col">
                   <span className="font-mono text-[9px] text-brand-muted uppercase">EMAIL ENQUIRIES</span>
-                  <span className="text-sm font-bold text-brand-text group-hover:text-brand-accent transition-colors">
+                  <span className="text-sm font-bold text-brand-text group-hover:text-brand-accent-text transition-colors">
                     hari@siyantraaisolution.com
                   </span>
                 </div>
@@ -94,12 +94,12 @@ export default function ContactPage() {
                 rel="noopener noreferrer"
                 className="flex items-center gap-4 bg-white p-4 rounded-xl border border-brand-border shadow-3xs hover:border-brand-accent hover:shadow-2xs transition-all duration-300 group cursor-pointer"
               >
-                <div className="w-10 h-10 rounded-lg bg-orange-50 border border-orange-100 flex items-center justify-center text-brand-accent group-hover:bg-brand-accent group-hover:text-white transition-all duration-300">
+                <div className="w-10 h-10 rounded-lg bg-orange-50 border border-orange-100 flex items-center justify-center text-brand-accent-text group-hover:bg-brand-accent group-hover:text-white transition-all duration-300">
                   <Phone className="w-5 h-5" />
                 </div>
                 <div className="flex flex-col">
                   <span className="font-mono text-[9px] text-brand-muted uppercase">INSTANT CHAT</span>
-                  <span className="text-sm font-bold text-brand-text group-hover:text-brand-accent transition-colors">
+                  <span className="text-sm font-bold text-brand-text group-hover:text-brand-accent-text transition-colors">
                     Whatsapp
                   </span>
                 </div>

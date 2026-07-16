@@ -1,12 +1,24 @@
 import { useState } from 'react';
 import { useRouter } from '../../hooks/useRouter';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence, useScroll, useSpring, useTransform } from 'motion/react';
 import { Activity, Shield, Users, Layers, LayoutGrid, ArrowRight, CheckCircle2, User, HelpCircle } from 'lucide-react';
 
 export default function CRMPage() {
   const { navigate } = useRouter();
   const [activeTab, setActiveTab] = useState<'pipeline' | 'roles' | 'analytics'>('pipeline');
   const [selectedRole, setSelectedRole] = useState<'admin' | 'rep' | 'viewer'>('admin');
+
+  const { scrollY } = useScroll();
+  const smoothScrollY = useSpring(scrollY, {
+    damping: 25,
+    stiffness: 100,
+    mass: 0.2
+  });
+  const yWidget = useTransform(smoothScrollY, [0, 800], [0, -85]);
+  const ySec1 = useTransform(smoothScrollY, [100, 1200], [35, -35]);
+  const ySec2 = useTransform(smoothScrollY, [100, 1200], [60, -60]);
+  const ySec3 = useTransform(smoothScrollY, [400, 1800], [25, -25]);
+  const ySec4 = useTransform(smoothScrollY, [400, 1800], [50, -50]);
 
   // Pipeline Kanban Mockup Data
   const kanbanStages = {
@@ -40,17 +52,50 @@ export default function CRMPage() {
       <div className="max-w-7xl mx-auto px-6 md:px-8">
         
         {/* Page Banner */}
-        <div className="border-b border-brand-border pb-12 mb-16 max-w-4xl">
-          <span className="font-mono text-[10px] text-brand-accent uppercase tracking-widest font-bold">
-            CAPABILITY / INTERNAL SOFTWARE
-          </span>
-          <h1 className="font-display text-5xl sm:text-6xl font-extrabold text-brand-text tracking-tighter mt-4 leading-none">
-            Tailored CRM & <br />
-            Internal Databases.
-          </h1>
-          <p className="font-display text-2xl text-brand-muted tracking-tight mt-6 leading-relaxed max-w-2xl">
-            We build proprietary dashboards and sales engines mapped precisely to your team’s internal metrics. Zero seat fees. Complete custom pipelines.
-          </p>
+        <div className="border-b border-brand-border pb-12 mb-16 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative">
+          <div className="lg:col-span-7">
+            <span className="font-mono text-[10px] text-brand-accent-text uppercase tracking-widest font-bold">
+              CAPABILITY / INTERNAL SOFTWARE
+            </span>
+            <h1 className="font-display text-5xl sm:text-6xl font-extrabold text-brand-text tracking-tighter mt-4 leading-none animate-none">
+              Tailored CRM & <br />
+              Internal Databases.
+            </h1>
+            <p className="font-display text-2xl text-brand-muted tracking-tight mt-6 leading-relaxed">
+              We build proprietary dashboards and sales engines mapped precisely to your team’s internal metrics. Zero seat fees. Complete custom pipelines.
+            </p>
+          </div>
+          
+          <div className="lg:col-span-5 flex justify-center lg:justify-end">
+            <motion.div
+              initial={{ opacity: 0, y: 15, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              style={{ y: yWidget }}
+              className="w-full max-w-sm bg-white rounded-2xl border border-brand-border shadow-xl p-5 relative overflow-hidden text-left"
+            >
+              <div className="flex justify-between items-center border-b border-brand-border pb-3 mb-4">
+                <span className="font-mono text-[8px] text-brand-muted uppercase">SALES PIPELINE OVERVIEW</span>
+                <span className="text-[8px] text-brand-accent-text font-bold uppercase">lead stats</span>
+              </div>
+              <div className="flex flex-col gap-3 text-left">
+                <div className="flex justify-between items-center bg-brand-card p-2 rounded-lg border border-brand-border">
+                  <div className="flex items-center gap-2">
+                    <div className="w-5 h-5 rounded-full bg-brand-accent/10 flex items-center justify-center text-brand-accent font-bold text-[10px]">L</div>
+                    <span className="text-[10px] font-bold text-brand-text">Lead Inflow Rate</span>
+                  </div>
+                  <span className="text-[10px] font-mono font-bold text-brand-success-text">+24.5% / wk</span>
+                </div>
+                <div className="flex justify-between items-center bg-brand-card p-2 rounded-lg border border-brand-border">
+                  <div className="flex items-center gap-2">
+                    <div className="w-5 h-5 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-600 font-bold text-[10px]">C</div>
+                    <span className="text-[10px] font-bold text-brand-text">Sales Conversion</span>
+                  </div>
+                  <span className="text-[10px] font-mono font-bold text-brand-success-text">92.4%</span>
+                </div>
+              </div>
+            </motion.div>
+          </div>
         </div>
 
         {/* Dashboard Showcase Title */}
@@ -68,7 +113,10 @@ export default function CRMPage() {
         </div>
 
         {/* Live Interactive CRM Shell */}
-        <div className="bg-white border border-brand-border rounded-2xl overflow-hidden shadow-xl mb-24 grid grid-cols-1 lg:grid-cols-12 min-h-[480px]">
+        <motion.div
+          style={{ y: ySec2 }}
+          className="bg-white border border-brand-border rounded-2xl overflow-hidden shadow-xl mb-24 grid grid-cols-1 lg:grid-cols-12 min-h-[480px]"
+        >
           
           {/* Dashboard Left Sidebar */}
           <div className="lg:col-span-3 bg-brand-card border-r border-brand-border p-5 flex flex-col justify-between">
@@ -256,22 +304,28 @@ export default function CRMPage() {
               <span>VER: 2.1.0-STABLE</span>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Dense Features Map */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
-          <div className="flex flex-col gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16 text-left">
+          <motion.div
+            style={{ y: ySec3 }}
+            className="flex flex-col gap-4"
+          >
             <h3 className="font-display text-xl font-extrabold text-brand-text">Sales Pipeline & Kanban Controls</h3>
             <p className="text-sm text-brand-muted leading-relaxed">
               We design drag-and-drop systems, automatic pricing models, and trigger workflows that synchronize deals instantly as contacts qualify.
             </p>
-          </div>
-          <div className="flex flex-col gap-4">
+          </motion.div>
+          <motion.div
+            style={{ y: ySec4 }}
+            className="flex flex-col gap-4"
+          >
             <h3 className="font-display text-xl font-extrabold text-brand-text">Inventories & Accounting Ledgers</h3>
             <p className="text-sm text-brand-muted leading-relaxed">
               No more external spreadsheets. We map your raw material stocks, invoice billing, and active supply logs directly inside the PostgreSQL system.
             </p>
-          </div>
+          </motion.div>
         </div>
 
       </div>

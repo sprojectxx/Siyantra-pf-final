@@ -34,7 +34,7 @@ export default function TechReel() {
 
       <div className="max-w-7xl mx-auto px-6 md:px-8 mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
         <div className="flex flex-col gap-2">
-          <span className="font-mono text-[10px] text-brand-accent uppercase tracking-widest font-bold">
+          <span className="font-mono text-[10px] text-brand-accent-text uppercase tracking-widest font-bold">
             PROVEN ECOSYSTEM
           </span>
           <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-brand-text tracking-tight">

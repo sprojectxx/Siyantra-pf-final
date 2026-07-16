@@ -1,9 +1,21 @@
 import { useRouter } from '../../hooks/useRouter';
-import { motion } from 'motion/react';
-import { ArrowRight, Sparkles, Target, Compass, Award, Shield } from 'lucide-react';
+import { motion, useScroll, useSpring, useTransform } from 'motion/react';
+import { ArrowRight, Sparkles, Target, Compass, Award, Shield, Code2, Layers, Database, Cloud, Cpu, GitBranch } from 'lucide-react';
 
 export default function About() {
   const { navigate } = useRouter();
+
+  const { scrollY } = useScroll();
+  const smoothScrollY = useSpring(scrollY, {
+    damping: 25,
+    stiffness: 100,
+    mass: 0.2
+  });
+  const yWidget = useTransform(smoothScrollY, [0, 800], [0, -85]);
+  const ySec1 = useTransform(smoothScrollY, [100, 1200], [35, -35]);
+  const ySec2 = useTransform(smoothScrollY, [100, 1200], [60, -60]);
+  const ySec3 = useTransform(smoothScrollY, [400, 1800], [25, -25]);
+  const ySec4 = useTransform(smoothScrollY, [400, 1800], [50, -50]);
 
   const milestones = [
     { year: 'Intelligent First', title: 'Why AI & Automation First?', desc: 'Legacy development is stagnant. We built Siyantra to fuse modern reactive frontend UI with robust back-of-house AI scoring systems.' },
@@ -22,21 +34,62 @@ export default function About() {
       <div className="max-w-7xl mx-auto px-6 md:px-8">
         
         {/* Editorial Title Banner */}
-        <div className="border-b border-brand-border pb-12 mb-16 max-w-4xl">
-          <span className="font-mono text-[10px] text-brand-accent uppercase tracking-widest font-bold">
-            SIYANTRA MANIFESTO
-          </span>
-          <h1 className="font-display text-5xl sm:text-6xl md:text-7xl font-extrabold text-brand-text tracking-tighter mt-4 leading-none">
-            We don’t build <br className="sm:hidden" /> websites.
-          </h1>
-          <p className="font-display text-2xl sm:text-3xl text-brand-muted tracking-tight mt-6 leading-relaxed max-w-2xl">
-            We engineer digital products that help modern businesses scale through AI, automation, and custom software.
-          </p>
+        <div className="border-b border-brand-border pb-12 mb-16 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative">
+          <div className="lg:col-span-7 text-left">
+            <span className="font-mono text-[10px] text-brand-accent-text uppercase tracking-widest font-bold">
+              SIYANTRA MANIFESTO
+            </span>
+            <h1 className="font-display text-5xl sm:text-6xl md:text-7xl font-extrabold text-brand-text tracking-tighter mt-4 leading-none">
+              We don’t build <br className="sm:hidden" /> websites.
+            </h1>
+            <p className="font-display text-2xl sm:text-3xl text-brand-muted tracking-tight mt-6 leading-relaxed">
+              We engineer digital products that help modern businesses scale through AI, automation, and custom software.
+            </p>
+          </div>
+          
+          <div className="lg:col-span-5 flex justify-center lg:justify-end">
+            <motion.div
+              initial={{ opacity: 0, y: 15, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              style={{ y: yWidget }}
+              className="w-full max-w-sm bg-white rounded-2xl border border-brand-border shadow-xl p-5 relative overflow-hidden h-48 flex flex-col justify-between"
+            >
+              <div className="flex justify-between items-center border-b border-brand-border/60 pb-2">
+                <span className="font-mono text-[8px] text-brand-muted uppercase">TECHNOLOGY MATRIX</span>
+                <span className="text-[8px] font-mono font-bold text-brand-accent-text">Standardized</span>
+              </div>
+              <div className="grid grid-cols-3 gap-3 my-auto text-left">
+                {[
+                  { name: 'React', icon: <Code2 className="w-3.5 h-3.5 text-blue-500" /> },
+                  { name: 'Node.js', icon: <Layers className="w-3.5 h-3.5 text-emerald-500" /> },
+                  { name: 'Postgres', icon: <Database className="w-3.5 h-3.5 text-indigo-500" /> },
+                  { name: 'AWS', icon: <Cloud className="w-3.5 h-3.5 text-orange-500" /> },
+                  { name: 'OpenAI', icon: <Cpu className="w-3.5 h-3.5 text-amber-500" /> },
+                  { name: 'n8n', icon: <GitBranch className="w-3.5 h-3.5 text-purple-500" /> }
+                ].map((tech, idx) => (
+                  <motion.div
+                    key={tech.name}
+                    whileHover={{ scale: 1.05 }}
+                    animate={{ y: [0, idx % 2 === 0 ? 3 : -3, 0] }}
+                    transition={{ duration: 3 + idx * 0.5, repeat: Infinity, ease: 'easeInOut' }}
+                    className="bg-brand-card border border-brand-border rounded-xl p-2 flex flex-col items-center justify-center gap-1.5 text-center shadow-3xs"
+                  >
+                    {tech.icon}
+                    <span className="text-[8px] font-mono font-bold text-neutral-800">{tech.name}</span>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
         </div>
 
         {/* Narrative Split Column Section */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start mb-24">
-          <div className="lg:col-span-5">
+          <motion.div
+            style={{ y: ySec1 }}
+            className="lg:col-span-5"
+          >
             <span className="font-mono text-[9px] text-brand-accent font-bold uppercase tracking-wider">
               OUR STRATEGY
             </span>
@@ -49,9 +102,12 @@ export default function About() {
             <p className="text-sm text-brand-muted leading-relaxed">
               Inspired by the design rigor of Apple, the structural perfection of Stripe, and the blazing execution of Linear—we create software designed to turn browsers into active buyers.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <motion.div
+            style={{ y: ySec2 }}
+            className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6"
+          >
             <div className="bg-brand-card p-6 rounded-2xl border border-brand-border">
               <span className="text-xs font-mono text-brand-accent font-bold">01 / PREMIUM</span>
               <h3 className="font-display text-lg font-bold text-brand-text mt-3 mb-1">Elite Presentation</h3>
@@ -92,7 +148,7 @@ export default function About() {
                 <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
               </button>
             </div>
-          </div>
+          </motion.div>
         </div>
 
         {/* Dynamic Philosophy Milestones */}
@@ -108,7 +164,11 @@ export default function About() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
             {milestones.map((milestone, idx) => (
-              <div key={idx} className="flex flex-col gap-3 relative z-10 text-left">
+              <motion.div
+                key={idx}
+                style={{ y: idx % 2 === 0 ? ySec3 : ySec4 }}
+                className="flex flex-col gap-3 relative z-10 text-left"
+              >
                 <span className="font-mono text-xs font-bold text-brand-accent bg-orange-50 border border-orange-100 px-2.5 py-1 rounded-md self-start">
                   {milestone.year}
                 </span>
@@ -118,7 +178,7 @@ export default function About() {
                 <p className="text-xs text-brand-muted leading-relaxed">
                   {milestone.desc}
                 </p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>

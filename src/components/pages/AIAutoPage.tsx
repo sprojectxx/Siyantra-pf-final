@@ -1,23 +1,35 @@
 // Optimized with sliding layoutId animations and pause controls
 import { useState, useEffect } from 'react';
 import { useRouter } from '../../hooks/useRouter';
-import { motion, AnimatePresence } from 'motion/react';
-import { Bot, ArrowRight, CheckCircle2, Cpu, Sparkles, Zap, MessageSquare, Terminal, RefreshCw, Mail, Sliders } from 'lucide-react';
+import { motion, AnimatePresence, useScroll, useSpring, useTransform } from 'motion/react';
+import { Bot, ArrowRight, CheckCircle2, Cpu, Sparkles, Zap, MessageSquare, Terminal, RefreshCw, Mail, Sliders, Inbox, Database, Calendar, Briefcase } from 'lucide-react';
 
 export default function AIAutoPage() {
   const { navigate } = useRouter();
   const [activeStep, setActiveStep] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
 
+  const { scrollY } = useScroll();
+  const smoothScrollY = useSpring(scrollY, {
+    damping: 25,
+    stiffness: 100,
+    mass: 0.2
+  });
+  const yWidget = useTransform(smoothScrollY, [0, 800], [0, -85]);
+  const ySec1 = useTransform(smoothScrollY, [100, 1200], [35, -35]);
+  const ySec2 = useTransform(smoothScrollY, [100, 1200], [60, -60]);
+  const ySec3 = useTransform(smoothScrollY, [400, 1800], [25, -25]);
+  const ySec4 = useTransform(smoothScrollY, [400, 1800], [50, -50]);
+
   const workflowSteps = [
-    { label: 'Lead Inbound', desc: 'Prospect submits quote form, triggers self-healing webhook', icon: '📥' },
-    { label: 'AI Agent Triage', desc: 'GPT models process request, structuring parameters', icon: '🤖' },
-    { label: 'Qualification', desc: 'Analyzes budget and scores fit within seconds', icon: '📊' },
-    { label: 'CRM Sync', desc: 'Inserts lead structured values into Postgres DB', icon: '🗄️' },
-    { label: 'Email Outbound', desc: 'Drafts bespoke introduction with custom scheduling calendar links', icon: '✉️' },
-    { label: 'Slack Alert', desc: 'Notifies sales channels with urgent context briefings', icon: '💬' },
-    { label: 'Calendar Block', desc: 'Automated appointment reservation confirmation', icon: '🗓️' },
-    { label: 'Sales Team Hand-off', desc: 'Rep receives deep briefing; closes 2.4x faster', icon: '💼' }
+    { label: 'Lead Inbound', desc: 'Prospect submits quote form, triggers self-healing webhook', icon: <Mail className="w-4 h-4 text-brand-accent-text" /> },
+    { label: 'AI Agent Triage', desc: 'GPT models process request, structuring parameters', icon: <Bot className="w-4 h-4 text-amber-500" /> },
+    { label: 'Qualification', desc: 'Analyzes budget and scores fit within seconds', icon: <Sliders className="w-4 h-4 text-red-500" /> },
+    { label: 'CRM Sync', desc: 'Inserts lead structured values into Postgres DB', icon: <Database className="w-4 h-4 text-indigo-500" /> },
+    { label: 'Email Outbound', desc: 'Drafts introduction with custom scheduling links', icon: <MessageSquare className="w-4 h-4 text-blue-500" /> },
+    { label: 'Slack Alert', desc: 'Notifies channels with urgent context briefings', icon: <Terminal className="w-4 h-4 text-emerald-500" /> },
+    { label: 'Calendar Block', desc: 'Automated appointment reservation confirmation', icon: <Calendar className="w-4 h-4 text-purple-500" /> },
+    { label: 'Sales Team Hand-off', desc: 'Rep receives deep briefing; closes 2.4x faster', icon: <Briefcase className="w-4 h-4 text-brand-accent-text" /> }
   ];
 
   // Auto-rotate pipeline highlights for visual storytelling
@@ -40,17 +52,76 @@ export default function AIAutoPage() {
       <div className="max-w-7xl mx-auto px-6 md:px-8">
         
         {/* Header Section */}
-        <div className="border-b border-brand-border pb-12 mb-16 max-w-4xl">
-          <span className="font-mono text-[10px] text-brand-accent uppercase tracking-widest font-bold">
-            CAPABILITY / COGNITIVE SYSTEMS
-          </span>
-          <h1 className="font-display text-5xl sm:text-6xl font-extrabold text-brand-text tracking-tighter mt-4 leading-tight">
-            AI Integrations & <br />
-            Workflow Automation.
-          </h1>
-          <p className="font-display text-2xl text-brand-muted tracking-tight mt-6 leading-relaxed max-w-2xl">
-            We build autonomous pipelines that link your databases with LLM logic, stripping away hundreds of hours of manual entry.
-          </p>
+        <div className="border-b border-brand-border pb-12 mb-16 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative">
+          <div className="lg:col-span-7">
+            <span className="font-mono text-[10px] text-brand-accent-text uppercase tracking-widest font-bold">
+              CAPABILITY / COGNITIVE SYSTEMS
+            </span>
+            <h1 className="font-display text-5xl sm:text-6xl font-extrabold text-brand-text tracking-tighter mt-4 leading-tight">
+              AI Integrations & <br />
+              Workflow Automation.
+            </h1>
+            <p className="font-display text-2xl text-brand-muted tracking-tight mt-6 leading-relaxed">
+              We build autonomous pipelines that link your databases with LLM logic, stripping away hundreds of hours of manual entry.
+            </p>
+          </div>
+          
+          <div className="lg:col-span-5 flex justify-center lg:justify-end">
+            <motion.div
+              initial={{ opacity: 0, y: 15, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              style={{ y: yWidget }}
+              className="w-full max-w-sm bg-brand-card rounded-2xl border border-brand-border shadow-xl p-5 relative overflow-hidden h-48 flex flex-col justify-between"
+            >
+              <div className="flex justify-between items-center border-b border-brand-border/60 pb-2">
+                <span className="font-mono text-[8px] text-brand-muted uppercase">AGENT FLOW ACTIVE</span>
+                <div className="flex items-center gap-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping" />
+                  <span className="text-[8px] font-mono font-bold text-brand-success-text">Executing</span>
+                </div>
+              </div>
+              
+              {/* Nodes and Links */}
+              <div className="relative flex items-center justify-between px-4 my-auto h-24">
+                {/* Connecting Line */}
+                <div className="absolute left-8 right-8 h-[2px] bg-neutral-200 z-0">
+                  {/* Animated sliding pulse */}
+                  <motion.div
+                    animate={{ left: ['0%', '100%'] }}
+                    transition={{ duration: 2.5, repeat: Infinity, ease: 'linear' }}
+                    className="absolute top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-brand-accent shadow-[0_0_8px_#FF7A00]"
+                  />
+                </div>
+
+                {/* Node 1: Trigger */}
+                <div className="flex flex-col items-center gap-1.5 z-10">
+                  <div className="w-10 h-10 rounded-xl bg-white border border-brand-border flex items-center justify-center shadow-xs relative">
+                    <div className="absolute inset-0 rounded-xl border border-brand-accent/30 animate-pulse" />
+                    <Inbox className="w-4 h-4 text-brand-accent-text" />
+                  </div>
+                  <span className="text-[8px] font-mono font-bold text-brand-text">Webhook</span>
+                </div>
+
+                {/* Node 2: AI Agent */}
+                <div className="flex flex-col items-center gap-1.5 z-10">
+                  <div className="w-12 h-12 rounded-xl bg-brand-text border border-neutral-800 flex items-center justify-center shadow-lg relative">
+                    <div className="absolute inset-0 rounded-xl border border-brand-accent/50 animate-ping" style={{ animationDuration: '3s' }} />
+                    <Bot className="w-5 h-5 text-emerald-400" />
+                  </div>
+                  <span className="text-[8px] font-mono font-bold text-brand-accent-text">AI Parser</span>
+                </div>
+
+                {/* Node 3: DB */}
+                <div className="flex flex-col items-center gap-1.5 z-10">
+                  <div className="w-10 h-10 rounded-xl bg-white border border-brand-border flex items-center justify-center shadow-xs relative">
+                    <Database className="w-4 h-4 text-neutral-600" />
+                  </div>
+                  <span className="text-[8px] font-mono font-bold text-brand-text">CRM Sync</span>
+                </div>
+              </div>
+            </motion.div>
+          </div>
         </div>
 
         {/* Animated Workflows Map */}
@@ -70,7 +141,10 @@ export default function AIAutoPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             
             {/* Left: Animated Step detail card */}
-            <div className="lg:col-span-4 bg-brand-text text-white p-6 rounded-2xl border border-neutral-800 shadow-xl flex flex-col justify-between h-72">
+            <motion.div
+              style={{ y: ySec1 }}
+              className="lg:col-span-4 bg-brand-text text-white p-6 rounded-2xl border border-neutral-800 shadow-xl flex flex-col justify-between h-72"
+            >
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeStep}
@@ -87,7 +161,9 @@ export default function AIAutoPage() {
                     <div className="w-2 h-2 rounded-full bg-brand-accent animate-pulse" />
                   </div>
                   <div className="flex items-center gap-3 mt-2">
-                    <span className="text-3xl select-none">{workflowSteps[activeStep].icon}</span>
+                    <div className="w-10 h-10 rounded-xl bg-neutral-900 border border-neutral-800 flex items-center justify-center text-brand-accent-text">
+                      {workflowSteps[activeStep].icon}
+                    </div>
                     <h3 className="font-display text-lg font-bold">
                       {workflowSteps[activeStep].label}
                     </h3>
@@ -108,10 +184,13 @@ export default function AIAutoPage() {
                   {isPlaying ? 'PAUSE CYCLE' : 'RESUME'}
                 </button>
               </div>
-            </div>
+            </motion.div>
 
             {/* Right: Pipeline Node Connector Tree */}
-            <div className="lg:col-span-8 bg-brand-card p-6 sm:p-8 rounded-2xl border border-brand-border grid grid-cols-2 sm:grid-cols-4 gap-4 relative select-none">
+            <motion.div
+              style={{ y: ySec2 }}
+              className="lg:col-span-8 bg-brand-card p-6 sm:p-8 rounded-2xl border border-brand-border grid grid-cols-2 sm:grid-cols-4 gap-4 relative select-none"
+            >
               
               {workflowSteps.map((step, idx) => {
                 const isActive = activeStep === idx;
@@ -140,8 +219,10 @@ export default function AIAutoPage() {
                       </motion.div>
                     )}
 
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="text-xl">{step.icon}</span>
+                    <div className="flex items-center gap-2 mb-3">
+                      <div className="w-8 h-8 rounded-lg bg-brand-card border border-brand-border flex items-center justify-center shadow-3xs">
+                        {step.icon}
+                      </div>
                       <span className="font-mono text-[9px] text-brand-muted font-bold uppercase">
                         STEP 0{idx + 1}
                       </span>
@@ -153,8 +234,7 @@ export default function AIAutoPage() {
                   </div>
                 );
               })}
-
-            </div>
+            </motion.div>
           </div>
         </div>
 
@@ -170,7 +250,10 @@ export default function AIAutoPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white p-6 rounded-2xl border border-brand-border shadow-3xs hover:border-brand-accent transition-colors flex flex-col justify-between h-56">
+            <motion.div
+              style={{ y: ySec3 }}
+              className="bg-white p-6 rounded-2xl border border-brand-border shadow-3xs hover:border-brand-accent transition-colors flex flex-col justify-between h-56"
+            >
               <div className="flex flex-col gap-3">
                 <MessageSquare className="w-5 h-5 text-brand-accent" />
                 <h3 className="font-display text-base font-bold text-brand-text">Cognitive Support Agents</h3>
@@ -179,9 +262,12 @@ export default function AIAutoPage() {
                 </p>
               </div>
               <span className="font-mono text-[9px] text-brand-muted uppercase">TYPE_01 // CHAT BOT</span>
-            </div>
+            </motion.div>
 
-            <div className="bg-white p-6 rounded-2xl border border-brand-border shadow-3xs hover:border-brand-accent transition-colors flex flex-col justify-between h-56">
+            <motion.div
+              style={{ y: ySec4 }}
+              className="bg-white p-6 rounded-2xl border border-brand-border shadow-3xs hover:border-brand-accent transition-colors flex flex-col justify-between h-56"
+            >
               <div className="flex flex-col gap-3">
                 <Sliders className="w-5 h-5 text-amber-500" />
                 <h3 className="font-display text-base font-bold text-brand-text">Dynamic Pricing & Scoring</h3>
@@ -190,9 +276,12 @@ export default function AIAutoPage() {
                 </p>
               </div>
               <span className="font-mono text-[9px] text-brand-muted uppercase">TYPE_02 // REGRESSOR</span>
-            </div>
+            </motion.div>
 
-            <div className="bg-white p-6 rounded-2xl border border-brand-border shadow-3xs hover:border-brand-accent transition-colors flex flex-col justify-between h-56">
+            <motion.div
+              style={{ y: ySec3 }}
+              className="bg-white p-6 rounded-2xl border border-brand-border shadow-3xs hover:border-brand-accent transition-colors flex flex-col justify-between h-56"
+            >
               <div className="flex flex-col gap-3">
                 <RefreshCw className="w-5 h-5 text-emerald-500" />
                 <h3 className="font-display text-base font-bold text-brand-text">Self-Healing Sync Engines</h3>
@@ -201,7 +290,7 @@ export default function AIAutoPage() {
                 </p>
               </div>
               <span className="font-mono text-[9px] text-brand-muted uppercase">TYPE_03 // CRON ENGINE</span>
-            </div>
+            </motion.div>
           </div>
         </div>
 

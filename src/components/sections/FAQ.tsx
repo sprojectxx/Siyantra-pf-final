@@ -16,7 +16,7 @@ export default function FAQ() {
         
         {/* Section Header */}
         <div className="flex flex-col items-center text-center max-w-xl mx-auto mb-16 gap-3">
-          <span className="font-mono text-[10px] text-brand-accent uppercase tracking-widest font-bold">
+          <span className="font-mono text-[10px] text-brand-accent-text uppercase tracking-widest font-bold">
             COMMON QUESTIONS
           </span>
           <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-brand-text tracking-tight">

@@ -1,11 +1,23 @@
 import { useState } from 'react';
 import { useRouter } from '../../hooks/useRouter';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence, useScroll, useSpring, useTransform } from 'motion/react';
 import { Laptop, ArrowRight, CheckCircle2, ShieldCheck, Zap, Code, Sparkles, HelpCircle, Heart, Landmark, GraduationCap, Building2, Cpu } from 'lucide-react';
 
 export default function WebDevPage() {
   const { navigate } = useRouter();
   const [activeType, setActiveType] = useState<string>('saas');
+
+  const { scrollY } = useScroll();
+  const smoothScrollY = useSpring(scrollY, {
+    damping: 25,
+    stiffness: 100,
+    mass: 0.2
+  });
+  const yWidget = useTransform(smoothScrollY, [0, 800], [0, -85]);
+  const ySec1 = useTransform(smoothScrollY, [100, 1200], [35, -35]);
+  const ySec2 = useTransform(smoothScrollY, [100, 1200], [60, -60]);
+  const ySec3 = useTransform(smoothScrollY, [400, 1800], [25, -25]);
+  const ySec4 = useTransform(smoothScrollY, [400, 1800], [50, -50]);
 
   const websiteTypes = [
     {
@@ -80,17 +92,54 @@ export default function WebDevPage() {
       <div className="max-w-7xl mx-auto px-6 md:px-8">
         
         {/* Header Block */}
-        <div className="border-b border-brand-border pb-12 mb-16 max-w-4xl">
-          <span className="font-mono text-[10px] text-brand-accent uppercase tracking-widest font-bold">
-            CAPABILITY / CORE DEV
-          </span>
-          <h1 className="font-display text-5xl sm:text-6xl font-extrabold text-brand-text tracking-tighter mt-4 leading-tight">
-            Custom Website & <br />
-            Full-Stack Development.
-          </h1>
-          <p className="font-display text-2xl text-brand-muted tracking-tight mt-6 leading-relaxed max-w-2xl">
-            We write clean, high-performance web systems using React, Vite, and Node.js. No slow page builders. No generic WordPress templates.
-          </p>
+        <div className="border-b border-brand-border pb-12 mb-16 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative">
+          <div className="lg:col-span-7">
+            <span className="font-mono text-[10px] text-brand-accent-text uppercase tracking-widest font-bold">
+              CAPABILITY / CORE DEV
+            </span>
+            <h1 className="font-display text-5xl sm:text-6xl font-extrabold text-brand-text tracking-tighter mt-4 leading-tight">
+              Custom Website & <br />
+              Full-Stack Development.
+            </h1>
+            <p className="font-display text-2xl text-brand-muted tracking-tight mt-6 leading-relaxed">
+              We write clean, high-performance web systems using React, Vite, and Node.js. No slow page builders. No generic WordPress templates.
+            </p>
+          </div>
+          
+          <div className="lg:col-span-5 flex justify-center lg:justify-end">
+            <motion.div
+              initial={{ opacity: 0, y: 15, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              style={{ y: yWidget }}
+              className="w-full max-w-sm bg-white rounded-2xl border border-brand-border shadow-xl p-5 relative overflow-hidden text-left"
+            >
+              <div className="flex justify-between items-center border-b border-brand-border pb-3 mb-4">
+                <span className="font-mono text-[8px] text-brand-muted uppercase">ENGINEERING SCORES</span>
+                <span className="text-[8px] text-emerald-600 font-bold uppercase">100% optimized</span>
+              </div>
+              <div className="flex justify-around items-center gap-2 mt-2">
+                <div className="flex flex-col items-center gap-1.5">
+                  <div className="w-12 h-12 rounded-full border-4 border-emerald-500/20 border-t-emerald-500 flex items-center justify-center relative">
+                    <span className="text-xs font-extrabold text-brand-success-text">100</span>
+                  </div>
+                  <span className="text-[8px] font-bold text-brand-muted font-mono uppercase">PERFORMANCE</span>
+                </div>
+                <div className="flex flex-col items-center gap-1.5">
+                  <div className="w-12 h-12 rounded-full border-4 border-emerald-500/20 border-t-emerald-500 flex items-center justify-center relative">
+                    <span className="text-xs font-extrabold text-brand-success-text">100</span>
+                  </div>
+                  <span className="text-[8px] font-bold text-brand-muted font-mono uppercase">ACCESSIBILITY</span>
+                </div>
+                <div className="flex flex-col items-center gap-1.5">
+                  <div className="w-12 h-12 rounded-full border-4 border-emerald-500/20 border-t-emerald-500 flex items-center justify-center relative">
+                    <span className="text-xs font-extrabold text-brand-success-text">100</span>
+                  </div>
+                  <span className="text-[8px] font-bold text-brand-muted font-mono uppercase">SEO READY</span>
+                </div>
+              </div>
+            </motion.div>
+          </div>
         </div>
 
         {/* Website Types Showcase Grid */}
@@ -108,12 +157,13 @@ export default function WebDevPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {websiteTypes.map((type) => {
+            {websiteTypes.map((type, idx) => {
               const isActive = activeType === type.id;
               return (
-                <div
+                <motion.div
                   key={type.id}
                   onClick={() => setActiveType(type.id)}
+                  style={{ y: idx % 2 === 0 ? ySec1 : ySec2 }}
                   className={`p-6 rounded-2xl bg-white border cursor-pointer transition-all duration-300 flex flex-col justify-between h-48 group ${
                     isActive 
                       ? 'border-brand-accent shadow-[0_0_20px_rgba(255,122,0,0.08)] bg-brand-card' 
@@ -142,7 +192,7 @@ export default function WebDevPage() {
                     <span>{isActive ? 'ACTIVE SPECIFICATION' : 'SELECT SPEC'}</span>
                     <ArrowRight className={`w-3.5 h-3.5 transition-transform ${isActive ? 'translate-x-1.5' : 'group-hover:translate-x-1'}`} />
                   </div>
-                </div>
+                </motion.div>
               );
             })}
           </div>
@@ -150,7 +200,10 @@ export default function WebDevPage() {
 
         {/* Why Custom Website Block */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center bg-brand-card rounded-2xl border border-brand-border p-8 sm:p-12 mb-24">
-          <div className="lg:col-span-6 flex flex-col gap-6">
+          <motion.div
+            style={{ y: ySec3 }}
+            className="lg:col-span-6 flex flex-col gap-6"
+          >
             <span className="font-mono text-[9px] text-brand-accent font-bold uppercase tracking-wider">
               CUSTOM VS WORDPRESS / PAGE BUILDERS
             </span>
@@ -174,10 +227,13 @@ export default function WebDevPage() {
                 <span className="text-xs text-brand-text font-bold">Absolute Security (No PHP/Database Hacking vectors)</span>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Performance chart mockup */}
-          <div className="lg:col-span-6 bg-white rounded-2xl border border-brand-border p-6 flex flex-col gap-6 shadow-3xs">
+          <motion.div
+            style={{ y: ySec4 }}
+            className="lg:col-span-6 bg-white rounded-2xl border border-brand-border p-6 flex flex-col gap-6 shadow-3xs"
+          >
             <div className="flex justify-between items-center border-b border-brand-border pb-3">
               <span className="font-mono text-[9px] text-brand-muted font-bold">LIGHTHOUSE CORE VITAL AUDIT</span>
               <span className="text-[10px] font-bold text-emerald-500 font-mono">100/100 EXCELLENT</span>
@@ -208,7 +264,7 @@ export default function WebDevPage() {
             <div className="bg-brand-card border border-brand-border rounded-xl p-4 text-xs text-brand-muted leading-relaxed">
               <strong>Audit Insight:</strong> WordPress templates require heavy asset loads. A Siyantra static site compresses assets automatically, shaving off 3.5 seconds of client friction and preventing cart abandonment.
             </div>
-          </div>
+          </motion.div>
         </div>
 
         {/* Features & Development Process Timeline */}
@@ -223,21 +279,30 @@ export default function WebDevPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="flex flex-col gap-2">
+            <motion.div
+              style={{ y: ySec3 }}
+              className="flex flex-col gap-2 text-left"
+            >
               <span className="font-mono text-xs font-bold text-brand-accent bg-orange-50 border border-orange-100 px-2 py-0.5 rounded self-start">Stage 1</span>
               <h4 className="font-display text-base font-extrabold text-brand-text mt-2">UX & Wireframing</h4>
-              <p className="text-xs text-brand-muted leading-relaxed">We design detailed viewport canvases in Figma, mapping navigation nodes and viewport boundaries cleanly before coding.</p>
-            </div>
-            <div className="flex flex-col gap-2">
+              <p className="text-xs text-brand-muted leading-relaxed font-sans mt-1">We design detailed viewport canvases in Figma, mapping navigation nodes and viewport boundaries cleanly before coding.</p>
+            </motion.div>
+            <motion.div
+              style={{ y: ySec4 }}
+              className="flex flex-col gap-2 text-left"
+            >
               <span className="font-mono text-xs font-bold text-brand-accent bg-orange-50 border border-orange-100 px-2 py-0.5 rounded self-start">Stage 2</span>
               <h4 className="font-display text-base font-extrabold text-brand-text mt-2">Component Programming</h4>
-              <p className="text-xs text-brand-muted leading-relaxed">Our engineers compile atomic components utilizing React 19, custom Tailwind classes, and smooth Framer animations.</p>
-            </div>
-            <div className="flex flex-col gap-2">
+              <p className="text-xs text-brand-muted leading-relaxed font-sans mt-1">Our engineers compile atomic components utilizing React 19, custom Tailwind classes, and smooth Framer animations.</p>
+            </motion.div>
+            <motion.div
+              style={{ y: ySec3 }}
+              className="flex flex-col gap-2 text-left"
+            >
               <span className="font-mono text-xs font-bold text-brand-accent bg-orange-50 border border-orange-100 px-2 py-0.5 rounded self-start">Stage 3</span>
               <h4 className="font-display text-base font-extrabold text-brand-text mt-2">Integration & Deploy</h4>
-              <p className="text-xs text-brand-muted leading-relaxed">We connect Express REST APIs, configure environment configurations, and launch the site on premium cloud servers.</p>
-            </div>
+              <p className="text-xs text-brand-muted leading-relaxed font-sans mt-1">We connect Express REST APIs, configure environment configurations, and launch the site on premium cloud servers.</p>
+            </motion.div>
           </div>
         </div>
 

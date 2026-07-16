@@ -81,7 +81,7 @@ export default function Footer() {
             {/* Micro Call-to-Action */}
             <button
               onClick={() => handleLinkClick('/contact')}
-              className="mt-8 md:mt-12 flex items-center gap-1 text-sm font-semibold text-brand-accent hover:text-brand-hover hover:gap-2 transition-all cursor-pointer self-start"
+              className="mt-8 md:mt-12 flex items-center gap-1 text-sm font-semibold text-brand-accent-text hover:text-brand-hover hover:gap-2 transition-all cursor-pointer self-start"
               id="footer-action-link"
             >
               Let's build something extraordinary
@@ -93,9 +93,9 @@ export default function Footer() {
           <div className="col-span-2 md:col-span-8 grid grid-cols-2 sm:grid-cols-4 gap-8">
             {Object.entries(columns).map(([title, links]) => (
               <div key={title} className="flex flex-col gap-4">
-                <h4 className="font-display text-xs font-bold tracking-widest text-brand-text uppercase">
+                <span className="font-display text-xs font-bold tracking-widest text-brand-text uppercase">
                   {title}
-                </h4>
+                </span>
                 <ul className="flex flex-col gap-3">
                   {links.map((link) => (
                     <li key={link.label}>
@@ -127,7 +127,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom Banner */}
-        <div className="border-t border-brand-border pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-brand-muted">
+        <div className="border-t border-brand-border pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-neutral-600">
           <div className="flex flex-wrap gap-x-6 gap-y-2 justify-center sm:justify-start">
             <span>SIYANTRA AI SOLUTIONS</span>
             <span>All rights reserved.</span>

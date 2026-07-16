@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -12,6 +11,8 @@
   --color-brand-text: #111111;
   --color-brand-muted: #6B7280;
   --color-brand-accent: #FF7A00;
+  --color-brand-accent-text: #C2410C;
+  --color-brand-success-text: #047857;
   --color-brand-hover: #FF9B3D;
 
   --animate-marquee: marquee 40s linear infinite;

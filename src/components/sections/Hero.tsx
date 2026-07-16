@@ -323,7 +323,7 @@ export default function Hero() {
         >
           <button
             onClick={() => navigate('/contact')}
-            className="px-8 py-4 bg-brand-accent text-white rounded-full font-bold shadow-lg shadow-brand-accent/20 hover:bg-brand-hover transition-all duration-300 flex items-center gap-2 cursor-pointer group animate-none"
+            className="px-8 py-4 bg-brand-accent-text text-white rounded-full font-bold shadow-lg shadow-brand-accent/20 hover:bg-brand-hover transition-all duration-300 flex items-center gap-2 cursor-pointer group animate-none"
             id="hero-cta-btn"
           >
             Start Your Project

@@ -116,13 +116,13 @@ export default function ServicesOverview() {
           <div className="relative w-full h-32 bg-white rounded-xl border border-brand-border overflow-hidden p-3 flex flex-col justify-between">
             <div className="flex justify-between items-center border-b border-brand-border pb-1">
               <span className="font-mono text-[8px] text-brand-muted uppercase">Deals Pipeline</span>
-              <span className="text-[9px] font-bold text-emerald-500">$18.5k</span>
+              <span className="text-[9px] font-bold text-brand-success-text">$18.5k</span>
             </div>
             <div className="grid grid-cols-3 gap-1.5 mt-2 flex-1">
               <div className="bg-brand-card rounded border border-brand-border p-1 flex flex-col justify-between h-14">
                 <div className="w-1/2 h-1 bg-neutral-300 rounded" />
                 <div className="w-full h-4 bg-orange-100 rounded-xs flex items-center justify-center">
-                  <span className="text-[6px] font-bold text-brand-accent">Lead</span>
+                  <span className="text-[6px] font-bold text-brand-accent-text">Lead</span>
                 </div>
               </div>
               <div className="bg-brand-card rounded border border-brand-border p-1 flex flex-col justify-between h-14">
@@ -149,7 +149,7 @@ export default function ServicesOverview() {
           <div className="relative w-full h-32 bg-white rounded-xl border border-brand-border overflow-hidden p-3 flex flex-col justify-between">
             <div className="flex justify-between items-center">
               <span className="font-mono text-[8px] text-brand-muted">MONTHLY BILLING</span>
-              <span className="text-[8px] text-brand-accent font-bold">STRIPIFY ACTIVE</span>
+              <span className="text-[8px] text-brand-accent-text font-bold">STRIPIFY ACTIVE</span>
             </div>
             <div className="flex items-center gap-4 my-auto">
               <div className="w-10 h-10 rounded-full border-4 border-brand-accent/20 border-t-brand-accent flex items-center justify-center relative">
@@ -162,7 +162,7 @@ export default function ServicesOverview() {
               </div>
               <div className="flex flex-col">
                 <span className="text-sm font-extrabold text-brand-text leading-none">$42,900</span>
-                <span className="text-[8px] text-emerald-500 font-bold mt-1">+14.2% monthly</span>
+                <span className="text-[8px] text-brand-success-text font-bold mt-1">+14.2% monthly</span>
               </div>
             </div>
           </div>
@@ -173,7 +173,7 @@ export default function ServicesOverview() {
           <div className="relative w-full h-32 bg-white rounded-xl border border-brand-border overflow-hidden p-3 flex flex-col justify-between">
             <div className="flex justify-between items-center">
               <span className="font-mono text-[8px] text-brand-muted">GOOGLE & META ADS</span>
-              <span className="text-[8px] font-bold text-brand-accent">ROI 4.2x</span>
+              <span className="text-[8px] font-bold text-brand-accent-text">ROI 4.2x</span>
             </div>
             <div className="flex items-end justify-between h-12 gap-1 px-1 mt-1">
               {[30, 45, 25, 60, 85, 55, 95].map((val, idx) => (
@@ -203,7 +203,7 @@ export default function ServicesOverview() {
         
         {/* Section Header */}
         <div className="max-w-xl flex flex-col gap-3 mb-16">
-          <span className="font-mono text-[10px] text-brand-accent uppercase tracking-widest font-bold">
+          <span className="font-mono text-[10px] text-brand-accent-text uppercase tracking-widest font-bold">
             SERVICES CAPABILITIES
           </span>
           <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-brand-text tracking-tight leading-tight">
