@@ -1,3 +1,4 @@
+// Vercel deployment redeploy trigger: 2026-07-18
 import { RouterProvider, useRouter } from './hooks/useRouter';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
