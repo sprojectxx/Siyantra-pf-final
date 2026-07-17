@@ -1,21 +1,21 @@
-// Vercel deployment redeploy trigger: 2026-07-18
 import { RouterProvider, useRouter } from './hooks/useRouter';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import CursorGlow from './components/ui/CursorGlow';
 import IntroWrapper from './components/animations/IntroWrapper';
+import { lazy, Suspense } from 'react';
 
-// Import Page Components
-import Home from './components/pages/Home';
-import About from './components/pages/About';
-import ServicesOverviewPage from './components/pages/ServicesOverviewPage';
-import WebDevPage from './components/pages/WebDevPage';
-import AIAutoPage from './components/pages/AIAutoPage';
-import CRMPage from './components/pages/CRMPage';
-import SaaSPage from './components/pages/SaaSPage';
-import MarketingPage from './components/pages/MarketingPage';
-import PortfolioPage from './components/pages/PortfolioPage';
-import ContactPage from './components/pages/ContactPage';
+// Lazy load subpages to reduce initial JS chunk size (Vite code splitting)
+const Home = lazy(() => import('./components/pages/Home'));
+const About = lazy(() => import('./components/pages/About'));
+const ServicesOverviewPage = lazy(() => import('./components/pages/ServicesOverviewPage'));
+const WebDevPage = lazy(() => import('./components/pages/WebDevPage'));
+const AIAutoPage = lazy(() => import('./components/pages/AIAutoPage'));
+const CRMPage = lazy(() => import('./components/pages/CRMPage'));
+const SaaSPage = lazy(() => import('./components/pages/SaaSPage'));
+const MarketingPage = lazy(() => import('./components/pages/MarketingPage'));
+const PortfolioPage = lazy(() => import('./components/pages/PortfolioPage'));
+const ContactPage = lazy(() => import('./components/pages/ContactPage'));
 
 import { AnimatePresence, motion } from 'motion/react';
 
@@ -65,7 +65,13 @@ function AppContent() {
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.25, ease: 'easeInOut' }}
           >
-            {renderPage()}
+            <Suspense fallback={
+              <div className="pt-40 pb-24 text-center min-h-[40vh] flex items-center justify-center">
+                <div className="w-6 h-6 border-2 border-brand-accent border-t-transparent rounded-full animate-spin" />
+              </div>
+            }>
+              {renderPage()}
+            </Suspense>
           </motion.div>
         </AnimatePresence>
       </main>

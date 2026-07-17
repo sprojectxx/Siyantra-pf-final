@@ -53,7 +53,7 @@ export default function Footer() {
             {!logoError ? (
               <div className="w-8 h-8 bg-neutral-950 rounded-lg flex items-center justify-center shadow-sm overflow-hidden p-0.5 border border-neutral-800">
                 <img
-                  src="/logo.png"
+                  src="/logo.webp"
                   alt="SIYANTRA logo"
                   onError={() => setLogoError(true)}
                   className="w-full h-full object-contain group-hover:rotate-12 transition-transform duration-300"

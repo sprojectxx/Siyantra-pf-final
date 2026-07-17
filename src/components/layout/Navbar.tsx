@@ -60,7 +60,7 @@ export default function Navbar() {
           >
             {!logoError ? (
               <img
-                src="/logo.png"
+                src="/logo.webp"
                 alt="SIYANTRA logo"
                 onError={() => setLogoError(true)}
                 className="w-6 h-6 object-contain group-hover:rotate-12 transition-transform duration-300"

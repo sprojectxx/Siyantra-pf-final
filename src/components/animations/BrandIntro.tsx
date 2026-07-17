@@ -56,7 +56,7 @@ export default function BrandIntro({ onComplete }: BrandIntroProps) {
             }}
           >
             <img
-              src="/logo.png"
+              src="/logo.webp"
               alt="SIYANTRA Logo"
               onError={() => setLogoError(true)}
               className="w-full h-full object-contain"
