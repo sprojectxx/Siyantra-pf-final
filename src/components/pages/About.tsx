@@ -183,6 +183,63 @@ export default function About() {
           </div>
         </div>
 
+        {/* Leadership Team Section */}
+        <div className="mb-24">
+          <div className="max-w-xl mb-12 text-left">
+            <span className="font-mono text-[9px] text-brand-accent font-bold uppercase tracking-wider">
+              LEADERSHIP TEAM
+            </span>
+            <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-brand-text tracking-tight mt-2">
+              The Minds Behind Siyantra
+            </h2>
+            <p className="text-xs text-brand-muted mt-2 leading-relaxed">
+              We compile premium frontend experiences coupled with secure, scalable back-of-house integrations.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <motion.div
+              style={{ y: ySec1 }}
+              className="bg-white p-6 rounded-2xl border border-brand-border shadow-3xs flex flex-col sm:flex-row gap-6 items-center text-left"
+            >
+              <img
+                src="/hari.webp"
+                alt="Hari Krishna"
+                className="w-24 h-24 rounded-full object-cover border-2 border-brand-accent/20 bg-brand-card shadow-3xs"
+              />
+              <div className="flex flex-col justify-between h-full gap-2">
+                <div>
+                  <span className="font-mono text-[8px] text-brand-accent font-bold tracking-widest uppercase">FOUNDER</span>
+                  <h3 className="font-display text-lg font-bold text-brand-text mt-1">Hari Krishna</h3>
+                  <p className="text-xs text-brand-muted leading-relaxed font-sans mt-1">
+                    Leading the technical vision and custom automation architecture. Specialized in high-throughput node synchronization and custom LLM interfaces.
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div
+              style={{ y: ySec2 }}
+              className="bg-white p-6 rounded-2xl border border-brand-border shadow-3xs flex flex-col sm:flex-row gap-6 items-center text-left"
+            >
+              <img
+                src="/bala.webp"
+                alt="Bala Rahul"
+                className="w-24 h-24 rounded-full object-cover border-2 border-brand-accent/20 bg-brand-card shadow-3xs"
+              />
+              <div className="flex flex-col justify-between h-full gap-2">
+                <div>
+                  <span className="font-mono text-[8px] text-brand-accent font-bold tracking-widest uppercase">CO-FOUNDER</span>
+                  <h3 className="font-display text-lg font-bold text-brand-text mt-1">Bala Rahul</h3>
+                  <p className="text-xs text-brand-muted leading-relaxed font-sans mt-1">
+                    Directing product operations, custom CRM layouts, and client operations. Dedicated to delivering sub-second load times and modular API integrations.
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+
       </div>
     </motion.div>
   );
