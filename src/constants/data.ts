@@ -130,6 +130,48 @@ export const PROJECTS: Project[] = [
     developmentDetails: 'Developed custom, optimized layouts with fluid transition triggers.',
     images: ['automation_preview.png'],
     externalLink: 'https://lexpobv.com/'
+  },
+  {
+    slug: 'rentora',
+    title: 'Rentora',
+    client: 'Rentora Technologies',
+    industry: 'SAAS PLATFORM',
+    category: 'RENTAL MANAGEMENT',
+    challenge: 'Rental businesses needed a modern, scalable solution to manage fleets, bookings, payments, and customer data from a single dashboard while reducing operational complexity.',
+    solution: 'We built a SaaS platform that automates rental operations, provides real-time fleet visibility, simplifies reservations, and enables businesses to scale efficiently through a cloud-based management system.',
+    technology: ['React', 'Node.js', 'Postgres', 'Tailwind CSS'],
+    result: 'Operational efficiency improved by 92%, administrative work reduced by 75%, and achieved 98% platform reliability.',
+    metrics: [
+      { label: 'OPERATIONAL EFFICIENCY', value: '92%' },
+      { label: 'REDUCED ADMIN WORK', value: '75%' },
+      { label: 'PLATFORM RELIABILITY', value: '98%' }
+    ],
+    problemDetails: 'Rental businesses needed a modern, scalable solution to manage fleets, bookings, payments, and customer data from a single dashboard while reducing operational complexity.',
+    researchDetails: 'Mapped out end-to-end booking life cycles and real-time fleet tracking requirements.',
+    developmentDetails: 'Developed custom web portal with reactive components, scalable backend data models, and secure Stripe payment hooks.',
+    images: ['saas_portal_preview.png'],
+    externalLink: 'https://rentora-spx.vercel.app/'
+  },
+  {
+    slug: 'kws-portal',
+    title: 'KWS Portal',
+    client: 'KWS Management Services',
+    industry: 'MANAGEMENT PORTAL',
+    category: 'OPERATIONAL DASHBOARD',
+    challenge: 'The client needed a consolidated operational dashboard to manage tasks, user roles, security audits, and automated service tracking across multiple departments.',
+    solution: 'We engineered an enterprise management portal utilizing secure single-sign-on (SSO), real-time task logs, automated workflow compliance, and structured role hierarchies.',
+    technology: ['React', 'TypeScript', 'Node.js', 'Postgres'],
+    result: 'Improved task resolution speed by 88%, saved 40% in administrative overhead, and achieved 100% security SLA compliance.',
+    metrics: [
+      { label: 'TASK RESOLUTION', value: '88%' },
+      { label: 'ADMIN OVERHEAD SAVED', value: '40%' },
+      { label: 'SECURITY COMPLIANCE', value: '100%' }
+    ],
+    problemDetails: 'The client needed a consolidated operational dashboard to manage tasks, user roles, security audits, and automated service tracking across multiple departments.',
+    researchDetails: 'Audited user management roles, access control mechanisms, and logs requirements.',
+    developmentDetails: 'Built a secure dashboard with React, Node.js, and Postgres, integrating advanced middleware authentication.',
+    images: ['crm_dash_preview.png'],
+    externalLink: 'https://kws-managementservices.online/login'
   }
 ];
 

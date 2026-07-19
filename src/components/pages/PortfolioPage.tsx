@@ -94,8 +94,13 @@ export default function PortfolioPage() {
             <motion.div
               key={proj.slug}
               style={{ y: idx % 2 === 0 ? ySec1 : ySec2 }}
-              className="p-6 rounded-2xl bg-white border border-brand-border shadow-3xs hover:shadow-lg transition-all duration-300 flex flex-col justify-between h-[510px] group relative"
+              className={`p-6 rounded-2xl bg-white border border-brand-border shadow-3xs hover:shadow-lg transition-all duration-300 flex flex-col justify-between h-[510px] group relative ${proj.externalLink ? 'cursor-pointer' : ''}`}
               id={`portfolio-card-${proj.slug}`}
+              onClick={() => {
+                if (proj.externalLink) {
+                  window.open(proj.externalLink, '_blank', 'noopener,noreferrer');
+                }
+              }}
             >
               <div className="flex flex-col gap-5">
                 
@@ -151,6 +156,7 @@ export default function PortfolioPage() {
                     href={proj.externalLink}
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
                     className="flex justify-between items-center text-xs font-bold text-brand-accent hover:underline group-hover:text-brand-accent transition-colors"
                   >
                     <span>Visit Live Platform</span>
