@@ -172,6 +172,46 @@ export const PROJECTS: Project[] = [
     developmentDetails: 'Built a secure dashboard with React, Node.js, and Postgres, integrating advanced middleware authentication.',
     images: ['crm_dash_preview.png'],
     externalLink: 'https://kws-managementservices.online/login'
+  },
+  {
+    slug: 'glow-cosmetics',
+    title: 'Glow Cosmetics',
+    client: 'Glow Premium Brands',
+    industry: 'E-COMMERCE',
+    category: 'DIGITAL COMMERCE',
+    challenge: 'A premium cosmetics brand needed a fast, high-converting digital storefront with immersive product visuals, seamless checkout flows, and automated inventory sync.',
+    solution: 'We built an ultra-fast headless e-commerce store with optimized page load speeds, curated animations, a custom cart system, and Stripe/Shopify sync hooks.',
+    technology: ['React', 'Next.js', 'Stripe', 'Tailwind CSS'],
+    result: 'Achieved a 4.2x speed boost on page transitions, contributing directly to a 32% growth in mobile checkouts.',
+    metrics: [
+      { label: 'LOAD SPEED BOOST', value: '4.2x' },
+      { label: 'MOBILE CHECKOUTS', value: '+32%' },
+      { label: 'MONTHLY ORDERS', value: '15k+' }
+    ],
+    problemDetails: 'A premium cosmetics brand needed a fast, high-converting digital storefront with immersive product visuals, seamless checkout flows, and automated inventory sync.',
+    researchDetails: 'Mapped checkout funnel friction points and user flow paths.',
+    developmentDetails: 'Built dynamic e-commerce frontend with responsive cart state and payment gateways.',
+    images: ['automation_preview.png']
+  },
+  {
+    slug: 'fleetos',
+    title: 'FleetOS',
+    client: 'Siyantra Flagship',
+    industry: 'SAAS PRODUCT',
+    category: 'FLEET COMPLIANCE',
+    challenge: 'Logistics operators struggled with manual compliance spreadsheets, missing critical tax, insurance, and MOT renewal deadlines, leading to costly vehicle groundings.',
+    solution: 'We engineered an AI-powered fleet management dashboard tracking vehicle compliance records, generating automated SMS/Email reminders, and utilizing OCR for instant document uploads.',
+    technology: ['React', 'TypeScript', 'Node.js', 'Postgres', 'Docker'],
+    result: 'Eliminated compliance overhead with automated alerts, ensuring zero missed MOT/insurance deadlines across active fleets.',
+    metrics: [
+      { label: 'MISSED DEADLINES', value: '0%' },
+      { label: 'REDUCTION IN FINES', value: '65%' },
+      { label: 'ACTIVE VEHICLES', value: '500+' }
+    ],
+    problemDetails: 'Logistics operators struggled with manual compliance spreadsheets, missing critical tax, insurance, and MOT renewal deadlines, leading to costly vehicle groundings.',
+    researchDetails: 'Analyzed MOT and compliance certificate schemas and logistics workflows.',
+    developmentDetails: 'Built vehicle tracking and scheduler reminder services connected with Postgres storage.',
+    images: ['saas_portal_preview.png']
   }
 ];
 
