@@ -197,43 +197,57 @@ export default function About() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {/* Co-founder: Bala Rahul on the left */}
             <motion.div
               style={{ y: ySec1 }}
-              className="bg-white p-6 rounded-2xl border border-brand-border shadow-3xs flex flex-col sm:flex-row gap-6 items-center text-left"
-            >
-              <img
-                src="/hari.webp"
-                alt="Hari Krishna"
-                className="w-24 h-24 rounded-full object-cover border-2 border-brand-accent/20 bg-brand-card shadow-3xs"
-              />
-              <div className="flex flex-col justify-between h-full gap-2">
-                <div>
-                  <span className="font-mono text-[8px] text-brand-accent font-bold tracking-widest uppercase">FOUNDER</span>
-                  <h3 className="font-display text-lg font-bold text-brand-text mt-1">Hari Krishna</h3>
-                  <p className="text-xs text-brand-muted leading-relaxed font-sans mt-1">
-                    Leading the technical vision and custom automation architecture. Specialized in high-throughput node synchronization and custom LLM interfaces.
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-
-            <motion.div
-              style={{ y: ySec2 }}
-              className="bg-white p-6 rounded-2xl border border-brand-border shadow-3xs flex flex-col sm:flex-row gap-6 items-center text-left"
+              className="relative aspect-[3/4] rounded-2xl overflow-hidden group border border-brand-border/20 shadow-lg text-left"
             >
               <img
                 src="/bala.webp"
                 alt="Bala Rahul"
-                className="w-24 h-24 rounded-full object-cover border-2 border-brand-accent/20 bg-brand-card shadow-3xs"
+                className="absolute inset-0 w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-700 ease-out scale-100 group-hover:scale-105"
               />
-              <div className="flex flex-col justify-between h-full gap-2">
-                <div>
-                  <span className="font-mono text-[8px] text-brand-accent font-bold tracking-widest uppercase">CO-FOUNDER</span>
-                  <h3 className="font-display text-lg font-bold text-brand-text mt-1">Bala Rahul</h3>
-                  <p className="text-xs text-brand-muted leading-relaxed font-sans mt-1">
-                    Directing product operations, custom CRM layouts, and client operations. Dedicated to delivering sub-second load times and modular API integrations.
-                  </p>
+              {/* Bottom Gradient Shadow Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+              
+              <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 flex flex-col gap-3">
+                <div className="flex flex-col">
+                  <h3 className="font-display text-2xl font-bold text-white tracking-tight">
+                    Bala Rahul
+                  </h3>
+                  <span className="text-xs text-neutral-300 font-mono mt-1 font-medium tracking-wide uppercase">
+                    Co-founder
+                  </span>
+                  {/* Decorative Left Accent Line */}
+                  <div className="w-8 h-[2px] bg-brand-accent mt-3 rounded-full" />
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Founder: Hari Krishna on the right */}
+            <motion.div
+              style={{ y: ySec2 }}
+              className="relative aspect-[3/4] rounded-2xl overflow-hidden group border border-brand-border/20 shadow-lg text-left"
+            >
+              <img
+                src="/hari.webp"
+                alt="Hari Krishna"
+                className="absolute inset-0 w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-700 ease-out scale-100 group-hover:scale-105"
+              />
+              {/* Bottom Gradient Shadow Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+              
+              <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 flex flex-col gap-3">
+                <div className="flex flex-col">
+                  <h3 className="font-display text-2xl font-bold text-white tracking-tight">
+                    Hari Krishna
+                  </h3>
+                  <span className="text-xs text-neutral-300 font-mono mt-1 font-medium tracking-wide uppercase">
+                    Founder
+                  </span>
+                  {/* Decorative Left Accent Line */}
+                  <div className="w-8 h-[2px] bg-brand-accent mt-3 rounded-full" />
                 </div>
               </div>
             </motion.div>
