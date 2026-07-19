@@ -27,7 +27,7 @@ export default function TechReel() {
   const doubledTechs = [...TECHNOLOGIES, ...TECHNOLOGIES];
 
   return (
-    <section className="py-20 bg-white border-y border-brand-border relative overflow-hidden" id="tech-reel">
+    <section className="py-20 bg-white border-y border-brand-border relative z-10 overflow-hidden" id="tech-reel">
       {/* Decorative gradients on edges for fade-out styling */}
       <div className="absolute top-0 bottom-0 left-0 w-16 sm:w-32 bg-gradient-to-r from-white to-transparent z-20 pointer-events-none" />
       <div className="absolute top-0 bottom-0 right-0 w-16 sm:w-32 bg-gradient-to-l from-white to-transparent z-20 pointer-events-none" />
@@ -47,7 +47,7 @@ export default function TechReel() {
       </div>
 
       {/* Marquee Wrapper */}
-      <div className="w-full flex overflow-x-hidden relative py-6">
+      <div className="w-full flex relative py-6">
         <div 
           className="flex gap-4 items-center whitespace-nowrap animate-marquee hover:[animation-play-state:paused]"
           style={{ width: 'max-content' }}
