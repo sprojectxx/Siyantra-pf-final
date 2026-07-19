@@ -4,6 +4,7 @@ import Footer from './components/layout/Footer';
 import CursorGlow from './components/ui/CursorGlow';
 import IntroWrapper from './components/animations/IntroWrapper';
 import { lazy, Suspense } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 
 // Lazy load subpages to reduce initial JS chunk size (Vite code splitting)
 const Home = lazy(() => import('./components/pages/Home'));
@@ -87,6 +88,7 @@ export default function App() {
     <RouterProvider>
       <IntroWrapper>
         <AppContent />
+        <Analytics />
       </IntroWrapper>
     </RouterProvider>
   );
