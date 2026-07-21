@@ -198,40 +198,13 @@ export default function About() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {/* Co-founder: Bala Rahul on the left */}
+            {/* Founder: Hari Krishna on the left */}
             <motion.div
               style={{ y: ySec1 }}
               className="relative aspect-[3/4] rounded-2xl overflow-hidden group border border-brand-border/20 shadow-lg text-left"
             >
               <img
-                src="/bala.webp"
-                alt="Bala Rahul"
-                className="absolute inset-0 w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-700 ease-out scale-100 group-hover:scale-105"
-              />
-              {/* Bottom Gradient Shadow Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
-              
-              <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 flex flex-col gap-3">
-                <div className="flex flex-col">
-                  <h3 className="font-display text-2xl font-bold text-white tracking-tight">
-                    Bala Rahul
-                  </h3>
-                  <span className="text-xs text-neutral-300 font-mono mt-1 font-medium tracking-wide uppercase">
-                    Co-founder
-                  </span>
-                  {/* Decorative Left Accent Line */}
-                  <div className="w-8 h-[2px] bg-brand-accent mt-3 rounded-full" />
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Founder: Hari Krishna on the right */}
-            <motion.div
-              style={{ y: ySec2 }}
-              className="relative aspect-[3/4] rounded-2xl overflow-hidden group border border-brand-border/20 shadow-lg text-left"
-            >
-              <img
-                src="/hari.webp"
+                src="/hari.png"
                 alt="Hari Krishna"
                 className="absolute inset-0 w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-700 ease-out scale-100 group-hover:scale-105"
               />
@@ -245,6 +218,33 @@ export default function About() {
                   </h3>
                   <span className="text-xs text-neutral-300 font-mono mt-1 font-medium tracking-wide uppercase">
                     Founder
+                  </span>
+                  {/* Decorative Left Accent Line */}
+                  <div className="w-8 h-[2px] bg-brand-accent mt-3 rounded-full" />
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Co-founder: Bala Rahul on the right */}
+            <motion.div
+              style={{ y: ySec2 }}
+              className="relative aspect-[3/4] rounded-2xl overflow-hidden group border border-brand-border/20 shadow-lg text-left"
+            >
+              <img
+                src="/bala.png"
+                alt="Bala Rahul"
+                className="absolute inset-0 w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-700 ease-out scale-100 group-hover:scale-105"
+              />
+              {/* Bottom Gradient Shadow Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+              
+              <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 flex flex-col gap-3">
+                <div className="flex flex-col">
+                  <h3 className="font-display text-2xl font-bold text-white tracking-tight">
+                    Bala Rahul
+                  </h3>
+                  <span className="text-xs text-neutral-300 font-mono mt-1 font-medium tracking-wide uppercase">
+                    Co-founder
                   </span>
                   {/* Decorative Left Accent Line */}
                   <div className="w-8 h-[2px] bg-brand-accent mt-3 rounded-full" />
